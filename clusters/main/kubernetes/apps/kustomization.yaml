@@ -7,3 +7,4 @@ resources:
   - hass/ks.yaml
   - jellyfin/ks.yaml
   - wg-easy/ks.yaml
+  - nextcloud/ks.yaml
