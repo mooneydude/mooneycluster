@@ -85,7 +85,7 @@ spec:
                       src:
                         enabled: true
                         trigger:
-                          schedule: 15 17 * * *
+                          schedule: 25 17 * * *
                       type: restic
             data:
                 enabled: true
@@ -102,15 +102,14 @@ spec:
                       src:
                         enabled: true
                         trigger:
-                          schedule: 15 17 * * *
+                          schedule: 25 17 * * *
                       type: restic
         cnpg:
             main:
                 backups:
                     credentials: s3
-                    enabled: true
+                    enabled: false
                     retentionPolicy: ""
-                    revision: "2"
                 # mode: recovery
                 monitoring:
                     disableDefaultQueries: false
@@ -119,14 +118,13 @@ spec:
                 pgVersion: 15
                 scheduledBackups:
                   - name: daily-backup
-                    schedule: "0 15 17 * * *"
+                    schedule: "0 25 17 * * *"
                     backupOwnerReference: self
                     immediate: true
                     suspend: false
                 recovery:
                     credentials: s3
                     enabled: true
-                    # revision: "3"
                     serverName: ""
                 user: nextcloud
 
