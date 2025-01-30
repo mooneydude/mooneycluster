@@ -10,3 +10,5 @@ resources:
   - nextcloud/ks.yaml
   - nc-talk/ks.yaml
   - vaultwarden/ks.yaml
+  - xepg/ks.yaml
+  - xteve/ks.yaml
