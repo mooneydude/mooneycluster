@@ -34,7 +34,7 @@ spec:
     # and/or disable its service
     global:
       stopAll: false
-    defaultCertificate: "domain-0-wildcard"
+    defaultCertificate: "cloudflare"
     service:
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}
