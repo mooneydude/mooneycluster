@@ -8,3 +8,4 @@ resources:
   - jellyfin/ks.yaml
   - wg-easy/ks.yaml
   - nextcloud/ks.yaml
+  - nc-talk/ks.yaml
