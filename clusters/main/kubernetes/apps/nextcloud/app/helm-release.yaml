@@ -44,7 +44,7 @@ spec:
             main:
                 enabled: true
                 hosts:
-                    - host: testcloud.${DOMAIN_1}
+                    - host: thecloud.${DOMAIN_1}
                       paths:
                         - path: /
                           pathType: Prefix
@@ -85,7 +85,7 @@ spec:
                       src:
                         enabled: true
                         trigger:
-                          schedule: 0 17 * * *
+                          schedule: 15 17 * * *
                       type: restic
             data:
                 enabled: true
@@ -102,7 +102,7 @@ spec:
                       src:
                         enabled: true
                         trigger:
-                          schedule: 0 17 * * *
+                          schedule: 15 17 * * *
                       type: restic
         cnpg:
             main:
@@ -119,7 +119,7 @@ spec:
                 pgVersion: 15
                 scheduledBackups:
                   - name: daily-backup
-                    schedule: "0 0 17 * * *"
+                    schedule: "0 15 17 * * *"
                     backupOwnerReference: self
                     immediate: true
                     suspend: false
