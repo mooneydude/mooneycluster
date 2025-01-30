@@ -52,7 +52,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: sign.${DOMAIN_1}
+          - host: testsign.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
