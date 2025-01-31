@@ -85,7 +85,7 @@ spec:
                       src:
                         enabled: true
                         trigger:
-                          schedule: 20 02 * * *
+                          schedule: 55 02 * * *
                       type: restic
             data:
                 enabled: true
@@ -102,7 +102,7 @@ spec:
                       src:
                         enabled: true
                         trigger:
-                          schedule: 20 02 * * *
+                          schedule: 55 02 * * *
                       type: restic
         cnpg:
             main:
@@ -110,6 +110,7 @@ spec:
                     credentials: s3
                     enabled: true
                     retentionPolicy: ""
+                    revision: "1"
                 # mode: recovery
                 monitoring:
                     disableDefaultQueries: false
@@ -118,7 +119,7 @@ spec:
                 pgVersion: 15
                 scheduledBackups:
                   - name: daily-backup
-                    schedule: "0 20 02 * * *"
+                    schedule: "0 55 02 * * *"
                     backupOwnerReference: self
                     immediate: true
                     suspend: false
