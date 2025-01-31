@@ -125,7 +125,7 @@ spec:
                     suspend: false
                 recovery:
                     credentials: s3
-                    enabled: true
+                    enabled: false
                     serverName: ""
                 user: nextcloud
 
