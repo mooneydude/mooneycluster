@@ -3,10 +3,10 @@ kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
   - cloudflared/ks.yaml
+  - wg-easy/ks.yaml
   # - docuseal/ks.yaml
   # - hass/ks.yaml
   # - jellyfin/ks.yaml
-  # - wg-easy/ks.yaml
   # - nextcloud/ks.yaml
   # - nc-talk/ks.yaml
   # - vaultwarden/ks.yaml

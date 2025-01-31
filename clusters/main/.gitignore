@@ -13,6 +13,6 @@ worker.yaml
 sopssecret.secret.yaml
 cluster/main/kubernetes/**/bootstrap-values.yaml.ct
 *kubeconfig
-pathces/controlplane3.yaml
-*patches/controlplane3.yaml
-controlplane3.yaml
+pathces/worker2.yaml
+*patches/worker2.yaml
+worker2.yaml
