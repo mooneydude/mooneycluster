@@ -108,7 +108,7 @@ spec:
             main:
                 backups:
                     credentials: s3
-                    enabled: true
+                    enabled: false
                     retentionPolicy: ""
                 mode: recovery
                 monitoring:
