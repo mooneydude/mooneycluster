@@ -70,9 +70,6 @@ spec:
             credentials:
                 initialAdminPassword: ${ADMIN_PASSWORD}
                 initialAdminUser: admin
-            general:
-                accessIP: ""
-                default_phone_region: US
             notify_push:
                 enabled: true
         persistence:
@@ -82,4 +79,3 @@ spec:
                 readOnly: false
                 server: ${TRUENAS_IP}
                 type: nfs
-
