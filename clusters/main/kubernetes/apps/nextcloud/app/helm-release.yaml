@@ -67,28 +67,14 @@ spec:
                         entrypoints:
                             - websecure
         nextcloud:
-            collabora:
-                enabled: false
             credentials:
                 initialAdminPassword: ${ADMIN_PASSWORD}
                 initialAdminUser: admin
             general:
-                accessIP: ${TRAEFIK_IP}
+                accessIP: ${TRUENAS_IP}
                 default_phone_region: US
             notify_push:
                 enabled: true
-            previews:
-                providers:
-                - BMP
-                - GIF
-                - JPEG
-                - Krita
-                - MarkDown
-                - MP3
-                - OpenDocument
-                - PNG
-                - TXT
-                - XBitmap
         persistence:
             data:
                 enabled: true
