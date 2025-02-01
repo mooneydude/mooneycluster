@@ -81,5 +81,5 @@ spec:
                 path: /mnt/data1/nc_userdata
                 readOnly: false
                 server: ${TRUENAS_IP}
-                type: nfs    
+                type: nfs
 
