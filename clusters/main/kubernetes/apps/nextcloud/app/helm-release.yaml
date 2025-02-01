@@ -44,7 +44,7 @@ spec:
             main:
                 enabled: true
                 hosts:
-                    - host: thecloud.${DOMAIN_1}
+                    - host: mycloud.${DOMAIN_1}
                       paths:
                         - path: /
                           pathType: Prefix
@@ -75,10 +75,3 @@ spec:
                 default_phone_region: US
             notify_push:
                 enabled: true
-        persistence:
-            data:
-                enabled: true
-                path: /mnt/data1/nc_userdata
-                readOnly: false
-                server: ${TRUENAS_IP}
-                type: nfs
