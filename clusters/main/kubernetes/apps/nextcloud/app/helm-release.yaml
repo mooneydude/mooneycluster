@@ -84,6 +84,8 @@ spec:
                       name: config
                       src:
                         enabled: true
+                        trigger:
+                            schedule: 0 17 * * *
                       type: restic        
             data:
                 enabled: true
