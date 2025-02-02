@@ -108,6 +108,12 @@ spec:
                     enabled: true
                     retentionPolicy: ""
                     revision: "2"
+                    scheduledBackups:
+                        - name: daily-backup
+                          schedule: "0 0 17 * * *"
+                          backupOwnerReference: self
+                          immediate: true
+                          suspend: false
                 # mode: recovery
                 monitoring:
                     disableDefaultQueries: false
