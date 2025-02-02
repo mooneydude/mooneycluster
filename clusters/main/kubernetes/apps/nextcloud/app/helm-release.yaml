@@ -106,7 +106,7 @@ spec:
         cnpg:
             main:
                 backups:
-                    enabled: true
+                    enabled: false
                     credentials: s3
                     retentionPolicy: ""
                     revision: "4"
