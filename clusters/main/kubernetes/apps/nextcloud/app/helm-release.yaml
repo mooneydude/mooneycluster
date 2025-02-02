@@ -75,12 +75,12 @@ spec:
                 default_phone_region: US
             notify_push:
                 enabled: true
-        persistence:
-            data:
-                enabled: true
-                type: nfs                
-                path: /mnt/data1/nc_userdata
-                server: ${TRUENAS_IP}
-            backups:
-                enabled: false
+        # persistence:
+        #     data:
+        #         enabled: true
+        #         type: nfs                
+        #         path: /mnt/data1/nc_userdata
+        #         server: ${TRUENAS_IP}
+        #     backups:
+        #         enabled: false
 
