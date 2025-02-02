@@ -76,11 +76,46 @@ spec:
             notify_push:
                 enabled: true
         persistence:
+            config:
+                volsync:
+                    - credentials: s3
+                      dest:
+                        enabled: true
+                      name: config
+                      src:
+                        enabled: true
+                      type: restic        
             data:
                 enabled: true
                 type: nfs                
                 path: /mnt/data1/nc_userdata
                 server: ${TRUENAS_IP}
-            backups:
-                enabled: false
+            html:
+                volsync:
+                    - credentials: s3
+                      dest:
+                        enabled: true
+                      name: html
+                      src:
+                        enabled: true
+                      type: restic
+        cnpg:
+            main:
+                backups:
+                    credentials: s3
+                    enabled: true
+                    retentionPolicy: ""
+                    revision: "2"
+                # mode: recovery
+                monitoring:
+                    disableDefaultQueries: false
+                    enablePodMonitor: true
+                password: ${NEXTCLOUD_CNPG_PWD}
+                pgVersion: 15
+                recovery:
+                    credentials: s3
+                    enabled: true
+                    # revision: "3"
+                    serverName: ""
+                user: nextcloud                                    
 
