@@ -106,10 +106,10 @@ spec:
         cnpg:
             main:
                 backups:
+                    enabled: false
                     credentials: s3
-                    enabled: true
                     retentionPolicy: ""
-                    revision: "3"
+                    revision: "4"
                     scheduledBackups:
                         - name: daily-backup
                           schedule: "0 30 20 * * *"
@@ -125,7 +125,7 @@ spec:
                 recovery:
                     credentials: s3
                     enabled: true
-                    revision: "2"
+                    revision: "3"
                     serverName: ""
                 user: nextcloud                                    
 
