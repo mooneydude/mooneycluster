@@ -92,8 +92,9 @@ spec:
           retentionPolicy: "14d"
           revison: "2"
         recovery:
-          method: object_store        
           credentials: s3
+          enabled: true
+          revision: ""
     workload:
       main:
         podSpec:
