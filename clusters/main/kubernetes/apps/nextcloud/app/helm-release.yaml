@@ -131,7 +131,11 @@ spec:
         workload:
             main:
                 podSpec:
-                nodeSelector:
-                    feature.node.kubernetes.io/hostname: "k8s-worker-3"
+                    nodeSelector:
+                        feature.node.kubernetes.io/hostname: "k8s-worker-3"
+            nginx:
+                podSpec:
+                    nodeSelector:
+                        feature.node.kubernetes.io/hostname: "k8s-worker-3"
 
 
