@@ -79,7 +79,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: "20 3 * * *"
+                schedule: "30 3 * * *"
       zigbeedongle:
         enabled: true
         type: device
@@ -92,7 +92,7 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 20 3 * * *"
+              schedule: "0 30 3 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
