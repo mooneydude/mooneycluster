@@ -73,7 +73,7 @@ spec:
         volsync:
           - name: b2
             type: restic
-            credentials: s2
+            credentials: b2
             dest:
               enabled: true
             src:
