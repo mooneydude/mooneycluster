@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: home-assistant
-      version: 26.11.0
+      version: 27.1.2
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -46,7 +46,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: hass.${DOMAIN_1}
+          - host: ha1.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
@@ -72,30 +72,27 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: "0 1 * * *"
+                schedule: "0 23 * * *"
       zigbeedongle:
         enabled: true
         type: device
         hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_0001-if00-port0              
     cnpg:
       main:
-        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: false
+          enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
-          retentionPolicy: ""
-          revision: "4"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 15 1 * * *"
+              schedule: "0 30 17 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
+          retentionPolicy: "14d"
         recovery:
+          method: object_store        
           credentials: s3
-          enabled: true
-          # revision: "3"
-          serverName: ""
     workload:
       main:
         podSpec:
