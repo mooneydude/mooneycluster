@@ -38,10 +38,17 @@ spec:
       s3:
         type: s3
         url: "${S3URL}"
+        bucket: "${S3PREFIX}-ha"
+        accessKey: "${S3ID}"
+        secretKey: "${S3KEY}"
+        encrKey: "${S3KEY}"
+      b2:
+        type: s3
+        url: "${S3URL}"
         bucket: "${S3PREFIX}-hass"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
-        encrKey: "${S3KEY}"       
+        encrKey: "${S3KEY}"                
     ingress:
       main:
         enabled: true
@@ -66,35 +73,35 @@ spec:
         volsync:
           - name: b2
             type: restic
-            credentials: s3
+            credentials: s2
             dest:
               enabled: true
             src:
               enabled: true
               trigger:
-                schedule: "0 23 * * *"
+                schedule: "20 3 * * *"
       zigbeedongle:
         enabled: true
         type: device
         hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_0001-if00-port0              
     cnpg:
       main:
-        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: false  # Set to 'false' when performing new install (recovery)
+          enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 30 17 * * *"
+              schedule: "0 20 3 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
           retentionPolicy: "14d"
-          revison: "2"
+          revison: "1"
         recovery:
           credentials: s3
           enabled: true
-          revision: ""
+          # revision: "1"
     workload:
       main:
         podSpec:
