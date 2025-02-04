@@ -39,6 +39,10 @@ spec:
       repository: docker.io/mooneydude/xepg
       pullPolicy: IfNotPresent
       tag: latest@sha256:2f215c94fdb1c1a2b59a6bbda490d2af734c8f3cbeab8709d12f9ac2c964376e
+    curl-image:
+      repository: docker.io/lwthiker/curl-impersonate
+      pullPolicy: IfNotPresent
+      tag: latest@sha256:8dc8d75163646288dc99f16cb76853bb26636ed3a4d19c1d98a8bbf075784eaf    
     securityContext:
       container:
         readOnlyRootFilesystem: false
