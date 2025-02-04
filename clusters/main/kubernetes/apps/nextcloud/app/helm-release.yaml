@@ -108,7 +108,7 @@ spec:
         cnpg:
             main:
                 backups:
-                    enabled: false
+                    enabled: true
                     credentials: s3
                     retentionPolicy: ""
                     revision: "5"
@@ -133,14 +133,5 @@ spec:
         podOptions:
             nodeSelector:
                 kubernetes.io/hostname: "k8s-worker-3"
-        # workload:
-        #     main:
-        #         podSpec:
-        #             nodeSelector:
-        #                 feature.node.kubernetes.io/hostname: "k8s-worker-3"
-        #     nginx:
-        #         podSpec:
-        #             nodeSelector:
-        #                 feature.node.kubernetes.io/hostname: "k8s-worker-3"
 
 
