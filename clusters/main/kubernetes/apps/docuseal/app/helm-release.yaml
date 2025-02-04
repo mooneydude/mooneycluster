@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: docuseal
-      version: 2.7.1
+      version: 2.8.2
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -41,13 +41,6 @@ spec:
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"       
     TZ: America/Chicago
-    service:
-      main:
-        ports:
-          main:
-            port: 10310
-            protocol: http
-            targetPort: 3000
     ingress:
       main:
         enabled: true
@@ -59,60 +52,35 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: cloudflare         
-    workload:
-      main:
-        podSpec:
-          containers:
-            main:
-              env:
-                DATABASE_URL:
-                  secretKeyRef:
-                    name: cnpg-main-urls
-                    key: std
-              probes:
-                liveness:
-                  type: http
-                  path: /
-                readiness:
-                  type: http
-                  path: /
-                startup:
-                  type: http
-                  path: /
-    persistence:
-      data:
-        mountPath: /data
-        volsync:
-        - name: data
-          type: restic
-          cleanupTempPVC: true
-          cleanupCachePVC: true
-          credentials: s3
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            trigger:
-              schedule: 30 15 * * *        
-
-    portal:
-      open:
-        enabled: true
-
-    cnpg:
-      main:
-        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
-        backups:
-          enabled: true  # Set to 'false' when performing new install (recovery)
-          credentials: s3
-          scheduledBackups:
-            - name: daily-backup
-              schedule: "0 30 15 * * *"
-              backupOwnerReference: self
-              immediate: true
-              suspend: false          
-          retentionPolicy: "14d"
-          revision: "1"
-        recovery:
-          method: object_store
-          credentials: s3
+    # persistence:
+    #   data:
+    #     mountPath: /data
+    #     volsync:
+    #     - name: data
+    #       type: restic
+    #       cleanupTempPVC: true
+    #       cleanupCachePVC: true
+    #       credentials: s3
+    #       dest:
+    #         enabled: true
+    #       src:
+    #         enabled: true
+    #         trigger:
+    #           schedule: 30 15 * * *        
+    # cnpg:
+    #   main:
+    #     # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+    #     backups:
+    #       enabled: true  # Set to 'false' when performing new install (recovery)
+    #       credentials: s3
+    #       scheduledBackups:
+    #         - name: daily-backup
+    #           schedule: "0 30 15 * * *"
+    #           backupOwnerReference: self
+    #           immediate: true
+    #           suspend: false          
+    #       retentionPolicy: "14d"
+    #       revision: "1"
+    #     recovery:
+    #       method: object_store
+    #       credentials: s3
