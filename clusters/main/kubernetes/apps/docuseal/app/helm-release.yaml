@@ -52,35 +52,37 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: cloudflare         
-    # persistence:
-    #   data:
-    #     mountPath: /data
-    #     volsync:
-    #     - name: data
-    #       type: restic
-    #       cleanupTempPVC: true
-    #       cleanupCachePVC: true
-    #       credentials: s3
-    #       dest:
-    #         enabled: true
-    #       src:
-    #         enabled: true
-    #         trigger:
-    #           schedule: 30 15 * * *        
-    # cnpg:
-    #   main:
-    #     # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
-    #     backups:
-    #       enabled: true  # Set to 'false' when performing new install (recovery)
-    #       credentials: s3
-    #       scheduledBackups:
-    #         - name: daily-backup
-    #           schedule: "0 30 15 * * *"
-    #           backupOwnerReference: self
-    #           immediate: true
-    #           suspend: false          
-    #       retentionPolicy: "14d"
-    #       revision: "1"
-    #     recovery:
-    #       method: object_store
-    #       credentials: s3
+    persistence:
+      data:
+        mountPath: /data
+        volsync:
+        - name: data
+          type: restic
+          cleanupTempPVC: true
+          cleanupCachePVC: true
+          credentials: s3
+          dest:
+            enabled: true
+          src:
+            enabled: true
+            trigger:
+              schedule: 15 16 * * *        
+    cnpg:
+      main:
+        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        backups:
+          enabled: true  # Set to 'false' when performing new install (recovery)
+          credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 15 16 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false          
+          retentionPolicy: ""
+          revision: "1"
+        recovery:
+          credentials: s3
+          enabled: true
+          # revision: "1"
+
