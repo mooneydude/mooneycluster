@@ -47,10 +47,6 @@ spec:
           integrations:
             traefik:
               enabled: true
-              ## To do
-              # middlewares:
-              #   - name: local
-              #     namespace: traefik
             certManager:
               enabled: true
               certificateIssuer: cloudflare  

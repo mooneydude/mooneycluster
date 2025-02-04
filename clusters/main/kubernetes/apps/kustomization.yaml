@@ -6,8 +6,9 @@ resources:
   - wg-easy/ks.yaml
   - hass/ks.yaml
   - nextcloud/ks.yaml
+  - nc-talk/ks.yaml
   - docuseal/ks.yaml
-  # - jellyfin/ks.yaml
+  - jellyfin/ks.yaml
   # - nc-talk/ks.yaml
   # - vaultwarden/ks.yaml
   # - xepg/ks.yaml
