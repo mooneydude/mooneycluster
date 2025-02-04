@@ -130,6 +130,9 @@ spec:
                     revision: "4"
                     serverName: ""
                 user: nextcloud
+        podOptions:
+            nodeSelector:
+                kubernetes.io/hostname: "k8s-worker-3"
         # workload:
         #     main:
         #         podSpec:
