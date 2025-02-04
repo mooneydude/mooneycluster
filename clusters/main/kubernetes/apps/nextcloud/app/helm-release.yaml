@@ -32,6 +32,8 @@ spec:
         global:
             stopAll: false
         TZ: America/Chicago
+        nodeSelector:
+            kubernetes.io/hostname: k8s-worker-1        
         credentials:
           s3:
             type: s3
