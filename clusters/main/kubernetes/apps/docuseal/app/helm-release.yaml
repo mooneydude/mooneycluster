@@ -52,7 +52,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: testsign.${DOMAIN_1}
+          - host: signme.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
@@ -93,7 +93,7 @@ spec:
           src:
             enabled: true
             trigger:
-              schedule: 0 7 * * *        
+              schedule: 30 15 * * *        
 
     portal:
       open:
@@ -107,11 +107,12 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 7 * * *"
+              schedule: "0 30 15 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
           retentionPolicy: "14d"
+          revision: "1"
         recovery:
           method: object_store
           credentials: s3
