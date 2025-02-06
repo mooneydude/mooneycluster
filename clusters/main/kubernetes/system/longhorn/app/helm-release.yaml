@@ -35,3 +35,12 @@ spec:
       defaultClass: true
       # Increase to 3 for a multi-node cluster
       defaultClassReplicaCount: 3
+    storageClass:
+      create: true
+      name: nfs-storage
+      provisioner: nfs
+      parameters:
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/web-server  # You can adjust this path as needed
+      reclaimPolicy: Retain
+      volumeBindingMode: Immediate
