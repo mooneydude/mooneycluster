@@ -35,21 +35,3 @@ spec:
       defaultClass: true
       # Increase to 3 for a multi-node cluster
       defaultClassReplicaCount: 3
-      # Additional settings for RWX support
-      storageClass:
-        parameters:
-          # This parameter specifies that the storage class supports RWX volumes
-          shareManagerNodeSelector: ""
-          # Optional: If you want to control where the share manager pods are scheduled
-          # shareManagerTolerations: "key=value:NoSchedule"
-          # Allowed topologies for controlling where the volumes can be scheduled
-          allowedTopologies:
-          - matchLabelExpressions:
-            - key: topology.kubernetes.io/region
-              values:
-              - us-west-1  # Example, adjust based on your cluster's topology
-        # Ensure that the access mode includes RWX
-        accessModes:
-          - ReadWriteMany
-        # It's recommended to use 'WaitForFirstConsumer' for better volume binding control
-        volumeBindingMode: WaitForFirstConsumer
