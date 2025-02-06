@@ -93,33 +93,33 @@ spec:
             trigger:
               schedule: 30 20 * * *
           type: restic
-    cnpg:
-      main:
-        backups:
-          enabled: false
-          credentials: s3
-          retentionPolicy: ""
-          revision: "5"
-          scheduledBackups:
-          - name: daily-backup
-            schedule: "0 30 20 * * *"
-            backupOwnerReference: self
-            immediate: true
-            suspend: false
-        mode: recovery
-        monitoring:
-          disableDefaultQueries: false
-          enablePodMonitor: true
-        password: ${NEXTCLOUD_CNPG_PWD}
-        pgVersion: 15
-        recovery:
-          credentials: s3
-          enabled: true
-          revision: "4"
-          serverName: ""
-        user: nextcloud
-    podOptions:
-        nodeSelector:
-            kubernetes.io/hostname: "k8s-worker-3"
+    # cnpg:
+    #   main:
+    #     backups:
+    #       enabled: false
+    #       credentials: s3
+    #       retentionPolicy: ""
+    #       revision: "5"
+    #       scheduledBackups:
+    #       - name: daily-backup
+    #         schedule: "0 30 20 * * *"
+    #         backupOwnerReference: self
+    #         immediate: true
+    #         suspend: false
+    #     mode: recovery
+    #     monitoring:
+    #       disableDefaultQueries: false
+    #       enablePodMonitor: true
+    #     password: ${NEXTCLOUD_CNPG_PWD}
+    #     pgVersion: 15
+    #     recovery:
+    #       credentials: s3
+    #       enabled: true
+    #       revision: "4"
+    #       serverName: ""
+    #     user: nextcloud
+    # podOptions:
+    #     nodeSelector:
+    #         kubernetes.io/hostname: "k8s-worker-3"
 
 
