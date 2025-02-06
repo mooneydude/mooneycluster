@@ -80,6 +80,7 @@ spec:
         accessModes:
           - ReadWriteMany  # RWX
         size: 1Gi  # Example size, adjust as needed
+        storageClass: longhorn
       data:
         enabled: true
         type: nfs                
@@ -102,6 +103,7 @@ spec:
         accessModes:
           - ReadWriteMany  # RWX
         size: 10Gi  # Example size, adjust as needed
+        storageClass: longhorn
     cnpg:
       main:
         # mode: recovery      
