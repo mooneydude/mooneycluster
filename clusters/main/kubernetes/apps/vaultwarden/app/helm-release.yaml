@@ -75,11 +75,11 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 35 23 * * *
-        storageClass: longhorn
+                schedule: "35 23 * * *"
+        storageClass: longhorn  # Assuming you've set up an NFS storage class for RWX support
         accessModes:
           - ReadWriteMany  # RWX
-        size: 10Gi                  
+        size: 10Gi  # Example size, adjust as needed                
     # cnpg:
     #   main:
     #     mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
