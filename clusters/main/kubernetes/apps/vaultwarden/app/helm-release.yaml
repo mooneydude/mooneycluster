@@ -66,36 +66,43 @@ spec:
           token: ${VW_TOKEN}
     persistence:
       data:
-        volsync:
-          - name: b2
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true                          
-            src:
-              enabled: true
-              trigger:
-                schedule: "35 23 * * *"
-        storageClass: longhorn
-        accessModes:
-          - ReadWriteMany  # RWX
-        size: 10Gi                 
-    cnpg:
-      main:
-        mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
-        backups:
-          enabled: false  # Set to 'false' when performing new install (recovery)
-          credentials: s3
-          scheduledBackups:
-            - name: daily-backup
-              schedule: "0 35 23 * * *"
-              backupOwnerReference: self
-              immediate: true
-              suspend: false           
-          retentionPolicy: "7d"
-        recovery:
-          method: object_store
-          credentials: s3
+        enabled: true
+        type: nfs                
+        path: /mnt/data1/vaultwarden
+        server: ${TRUENAS_IP}
+
+    # persistence:
+    #   data:
+    #     volsync:
+    #       - name: b2
+    #         type: restic
+    #         credentials: s3
+    #         dest:
+    #           enabled: true                          
+    #         src:
+    #           enabled: true
+    #           trigger:
+    #             schedule: "35 23 * * *"
+    #     storageClass: longhorn
+    #     accessModes:
+    #       - ReadWriteMany  # RWX
+    #     size: 10Gi                 
+    # cnpg:
+    #   main:
+    #     mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
+    #     backups:
+    #       enabled: false  # Set to 'false' when performing new install (recovery)
+    #       credentials: s3
+    #       scheduledBackups:
+    #         - name: daily-backup
+    #           schedule: "0 35 23 * * *"
+    #           backupOwnerReference: self
+    #           immediate: true
+    #           suspend: false           
+    #       retentionPolicy: "7d"
+    #     recovery:
+    #       method: object_store
+    #       credentials: s3
     workload:
       main:
         type: Deployment
