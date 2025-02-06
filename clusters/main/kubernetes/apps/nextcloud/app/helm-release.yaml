@@ -157,7 +157,7 @@ spec:
                             primary: true
                             envFrom:
                                 - configMapRef:
-                                    name: nextcloud-config
+                                  name: nextcloud-config
                             probes:
                                 liveness:
                                     enabled: true
