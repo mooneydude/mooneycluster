@@ -8,7 +8,7 @@ resources:
   # - nextcloud/ks.yaml
   - nc-talk/ks.yaml
   - docuseal/ks.yaml
-  # - jellyfin/ks.yaml
+  - jellyfin/ks.yaml
   - vaultwarden/ks.yaml
   - xepg/ks.yaml
   - xteve/ks.yaml
