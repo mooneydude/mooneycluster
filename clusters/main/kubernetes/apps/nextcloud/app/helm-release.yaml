@@ -46,7 +46,7 @@ spec:
             main:
                 enabled: true
                 hosts:
-                    - host: cloud.${DOMAIN_1}
+                    - host: mycloud.${DOMAIN_1}
                       paths:
                         - path: /
                           pathType: Prefix
@@ -88,12 +88,19 @@ spec:
                         enabled: true
                         trigger:
                             schedule: 30 20 * * *
-                      type: restic        
+                      type: restic
+                storageClass: longhorn  # Assuming you've set up an NFS storage class for RWX support
+                accessModes:
+                    - ReadWriteMany  # RWX
+                size: 1Gi                              
             data:
                 enabled: true
                 type: nfs                
                 path: /mnt/data1/nc_userdata
                 server: ${TRUENAS_IP}
+                accessModes:
+                    - ReadWriteMany  # RWX
+                size: 100Gi  # Example size, adjust as needed
             html:
                 volsync:
                     - credentials: s3
@@ -105,33 +112,93 @@ spec:
                         trigger:
                             schedule: 30 20 * * *
                       type: restic
-        cnpg:
+                storageClass: longhorn  # Assuming you've set up an NFS storage class for RWX support
+                accessModes:
+                    - ReadWriteMany  # RWX
+                size: 10Gi                  
+        # cnpg:
+        #     main:
+        #         backups:
+        #             enabled: false
+        #             credentials: s3
+        #             retentionPolicy: ""
+        #             revision: "5"
+        #             scheduledBackups:
+        #                 - name: daily-backup
+        #                   schedule: "0 30 20 * * *"
+        #                   backupOwnerReference: self
+        #                   immediate: true
+        #                   suspend: false
+        #         mode: recovery
+        #         monitoring:
+        #             disableDefaultQueries: false
+        #             enablePodMonitor: true
+        #         password: ${NEXTCLOUD_CNPG_PWD}
+        #         pgVersion: 15
+        #         recovery:
+        #             credentials: s3
+        #             enabled: true
+        #             revision: "4"
+        #             serverName: ""
+        #         user: nextcloud
+
+        # podOptions:
+        #     nodeSelector:
+        #         kubernetes.io/hostname: "k8s-worker-3"
+        workload:
             main:
-                backups:
+                type: Deployment
+                strategy: RollingUpdate
+                replicas: 2
+                podSpec:
+                containers:
+                    main:
                     enabled: true
-                    credentials: s3
-                    retentionPolicy: ""
-                    revision: "5"
-                    scheduledBackups:
-                        - name: daily-backup
-                          schedule: "0 30 20 * * *"
-                          backupOwnerReference: self
-                          immediate: true
-                          suspend: false
-                mode: recovery
-                monitoring:
-                    disableDefaultQueries: false
-                    enablePodMonitor: true
-                password: ${NEXTCLOUD_CNPG_PWD}
-                pgVersion: 15
-                recovery:
-                    credentials: s3
-                    enabled: true
-                    revision: "4"
-                    serverName: ""
-                user: nextcloud
-        podOptions:
-            nodeSelector:
-                kubernetes.io/hostname: "k8s-worker-3"
+                    primary: true
+                    envFrom:
+                        - configMapRef:
+                            name: nextcloud-config
+                    probes:
+                        liveness:
+                            enabled: true
+                            type: exec
+                            command: /healthcheck.sh
+                        readiness:
+                            enabled: true
+                            type: exec
+                            command: /healthcheck.sh
+                        startup:
+                            enabled: true
+                            type: tcp
+                            port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
+            nginx:
+                enabled: true
+                type: Deployment
+                strategy: RollingUpdate
+                replicas: 2
+                podSpec:
+                containers:
+                    nginx:
+                        enabled: true
+                        primary: true
+                        imageSelector: nginxImage
+                    probes:
+                        readiness:
+                            enabled: true
+                            path: /robots.txt
+                            port: "{{ .Values.service.main.ports.main.port }}"
+                            httpHeaders:
+                                Host: kube.internal.healthcheck
+                        liveness:
+                            enabled: true
+                            path: /robots.txt
+                            port: "{{ .Values.service.main.ports.main.port }}"
+                            httpHeaders:
+                                Host: kube.internal.healthcheck
+                        startup:
+                            enabled: true
+                            type: tcp
+                            port: "{{ .Values.service.main.ports.main.port }}"        
+
 
 
