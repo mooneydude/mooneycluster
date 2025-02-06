@@ -68,15 +68,15 @@ spec:
     persistence:
       config:
         volsync:
-        - credentials: s3
+        - name: config
+          credentials: s3
+          type: restic
           dest:
             enabled: true
-          name: config
           src:
             enabled: true
             trigger:
               schedule: 15 20 * * *
-          type: restic
         accessModes:
           - ReadWriteMany  # RWX
         size: 1Gi  # Example size, adjust as needed
@@ -90,20 +90,21 @@ spec:
         size: 100Gi  # Example size, adjust as needed
       html:
         volsync:
-        - credentials: s3
+        - name: html
+          credentials: s3
+          type: restic
           dest:
             enabled: true
-          name: html
           src:
             enabled: true
             trigger:
               schedule: 15 20 * * *
-          type: restic
         accessModes:
           - ReadWriteMany  # RWX
         size: 10Gi  # Example size, adjust as needed
     cnpg:
       main:
+        # mode: recovery      
         backups:
           enabled: true
           credentials: s3
@@ -115,7 +116,6 @@ spec:
             backupOwnerReference: self
             immediate: true
             suspend: false
-        # mode: recovery
         monitoring:
           disableDefaultQueries: false
           enablePodMonitor: true
