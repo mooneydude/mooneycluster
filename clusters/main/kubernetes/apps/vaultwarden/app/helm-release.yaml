@@ -46,7 +46,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: vault.${DOMAIN_1}
+          - host: myvault.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
@@ -70,7 +70,9 @@ spec:
         type: nfs                
         path: /mnt/data1/vaultwarden
         server: ${TRUENAS_IP}
-
+        accessModes:
+          - ReadWriteMany  # RWX
+        size: 10Gi  # Example size, adjust as needed
     # persistence:
     #   data:
     #     volsync:
@@ -87,22 +89,22 @@ spec:
     #     accessModes:
     #       - ReadWriteMany  # RWX
     #     size: 10Gi                 
-    # cnpg:
-    #   main:
-    #     mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
-    #     backups:
-    #       enabled: false  # Set to 'false' when performing new install (recovery)
-    #       credentials: s3
-    #       scheduledBackups:
-    #         - name: daily-backup
-    #           schedule: "0 35 23 * * *"
-    #           backupOwnerReference: self
-    #           immediate: true
-    #           suspend: false           
-    #       retentionPolicy: "7d"
-    #     recovery:
-    #       method: object_store
-    #       credentials: s3
+    cnpg:
+      main:
+        mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
+        backups:
+          enabled: false  # Set to 'false' when performing new install (recovery)
+          credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 35 23 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false           
+          retentionPolicy: "7d"
+        recovery:
+          method: object_store
+          credentials: s3
     workload:
       main:
         type: Deployment
