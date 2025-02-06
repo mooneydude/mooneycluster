@@ -64,34 +64,41 @@ spec:
           enabled: true
           disableAdminToken: false
           token: ${VW_TOKEN}
+    # persistence:
+    #   data:
+    #     volsync:
+    #       - name: b2
+    #         type: restic
+    #         credentials: s3
+    #         dest:
+    #           enabled: true                          
+    #         src:
+    #           enabled: true
+    #           trigger:
+    #             schedule: 35 23 * * *
+    # cnpg:
+    #   main:
+    #     mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
+    #     backups:
+    #       enabled: false  # Set to 'false' when performing new install (recovery)
+    #       credentials: s3
+    #       scheduledBackups:
+    #         - name: daily-backup
+    #           schedule: "0 35 23 * * *"
+    #           backupOwnerReference: self
+    #           immediate: true
+    #           suspend: false           
+    #       retentionPolicy: "7d"
+    #     recovery:
+    #       method: object_store
+    #       credentials: 
     persistence:
       data:
-        volsync:
-          - name: b2
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true                          
-            src:
-              enabled: true
-              trigger:
-                schedule: 35 23 * * *
-    cnpg:
-      main:
-        mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
-        backups:
-          enabled: false  # Set to 'false' when performing new install (recovery)
-          credentials: s3
-          scheduledBackups:
-            - name: daily-backup
-              schedule: "0 35 23 * * *"
-              backupOwnerReference: self
-              immediate: true
-              suspend: false           
-          retentionPolicy: "7d"
-        recovery:
-          method: object_store
-          credentials: s3
+      enabled: true
+      storageClass: longhorn
+      size: 100Gi
+      accessModes:
+        - ReadWriteMany
     workload:
       main:
         type: Deployment
