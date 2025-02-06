@@ -94,11 +94,11 @@ spec:
     #       credentials: 
     persistence:
       data:
-      enabled: true
-      storageClass: longhorn
-      size: 100Gi
-      accessModes:
-        - ReadWriteMany
+        enabled: true
+        storageClass: longhorn
+        size: 100Gi
+        accessModes:
+          - ReadWriteMany
     workload:
       main:
         type: Deployment
