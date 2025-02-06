@@ -70,15 +70,15 @@ spec:
     persistence:
       config:
         volsync:
-          - credentials: s3
-            dest:
-              enabled: true
-              name: config
-            src:
-              enabled: true
-              trigger:
-                schedule: 30 20 * * *
-              type: restic
+        - credentials: s3
+          dest:
+            enabled: true
+            name: config
+          src:
+            enabled: true
+            trigger:
+              schedule: 30 20 * * *
+            type: restic
         storageClass: longhorn # Assuming you've set up an NFS storage class for RWX support
         accessModes:
           - ReadWriteMany # RWX
@@ -93,15 +93,15 @@ spec:
         size: 100Gi # Example size, adjust as needed
       html:
         volsync:
-          - credentials: s3
-            dest:
-              enabled: true
-              name: html
-            src:
-              enabled: true
-              trigger:
-                schedule: 30 20 * * *
-              type: restic
+        - credentials: s3
+          dest:
+            enabled: true
+            name: html
+          src:
+            enabled: true
+            trigger:
+              schedule: 30 20 * * *
+            type: restic
         storageClass: longhorn # Assuming you've set up an NFS storage class for RWX support
         accessModes:
           - ReadWriteMany # RWX
