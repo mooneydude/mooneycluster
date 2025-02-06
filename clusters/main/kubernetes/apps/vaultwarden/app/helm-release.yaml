@@ -64,18 +64,22 @@ spec:
           enabled: true
           disableAdminToken: false
           token: ${VW_TOKEN}
-    # persistence:
-    #   data:
-    #     volsync:
-    #       - name: b2
-    #         type: restic
-    #         credentials: s3
-    #         dest:
-    #           enabled: true                          
-    #         src:
-    #           enabled: true
-    #           trigger:
-    #             schedule: 35 23 * * *
+    persistence:
+      data:
+        volsync:
+          - name: b2
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true                          
+            src:
+              enabled: true
+              trigger:
+                schedule: 35 23 * * *
+        storageClass: longhorn
+        accessModes:
+          - ReadWriteMany  # RWX
+        size: 10Gi                  
     # cnpg:
     #   main:
     #     mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
@@ -92,13 +96,6 @@ spec:
     #     recovery:
     #       method: object_store
     #       credentials: 
-    persistence:
-      data:
-        enabled: true
-        storageClass: longhorn
-        size: 100Gi
-        accessModes:
-          - ReadWriteMany
     workload:
       main:
         type: Deployment
