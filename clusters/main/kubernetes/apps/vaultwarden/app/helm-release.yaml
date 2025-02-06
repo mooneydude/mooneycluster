@@ -98,23 +98,23 @@ spec:
           retentionPolicy: "7d"
         recovery:
           method: object_store
-          credentials: 
-    # workload:
-    #   main:
-    #     type: Deployment
-    #     strategy: RollingUpdate
-    #     replicas: 2      
-    #     podSpec:
-    #       containers:
-    #         main:
-    #           env:
-    #             DOMAIN: "https://{{ if .Values.ingress }}{{ if .Values.ingress.main.enabled }}{{ ( index .Values.ingress.main.hosts 0 ).host }}{{ else }}placeholder.com{{ end }}{{ else }}placeholder.com{{ end }}"
-    #             DATABASE_URL:
-    #               secretKeyRef:
-    #                 name: cnpg-main-urls
-    #                 key: std
-    #           envFrom:
-    #             - configMapRef:
-    #                 name: vaultwardenconfig
-    #             - secretRef:
-    #                 name: vaultwardensecret          
+          credentials: s3
+    workload:
+      main:
+        type: Deployment
+        strategy: RollingUpdate
+        replicas: 2      
+        podSpec:
+          containers:
+            main:
+              env:
+                DOMAIN: "https://{{ if .Values.ingress }}{{ if .Values.ingress.main.enabled }}{{ ( index .Values.ingress.main.hosts 0 ).host }}{{ else }}placeholder.com{{ end }}{{ else }}placeholder.com{{ end }}"
+                DATABASE_URL:
+                  secretKeyRef:
+                    name: cnpg-main-urls
+                    key: std
+              envFrom:
+                - configMapRef:
+                    name: vaultwardenconfig
+                - secretRef:
+                    name: vaultwardensecret          
