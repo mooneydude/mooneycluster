@@ -66,44 +66,25 @@ spec:
       notify_push:
         enabled: true
     persistence:
-      config:
-        volsync:
-        - name: config
-          credentials: s3
-          type: restic
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            trigger:
-              schedule: 15 20 * * *
-        accessModes:
-          - ReadWriteMany  # RWX
-        size: 1Gi 
+      html:
+        enabled: true
         storageClass: longhorn
+        size: 10Gi
+        accessModes:
+          - ReadWriteMany
+      config:
+        enabled: true
+        storageClass: longhorn
+        size: 1Gi
+        accessModes:
+          - ReadWriteMany
       data:
         enabled: true
-        type: nfs                
-        path: /mnt/data1/nc_userdata
-        server: ${TRUENAS_IP}
-        accessModes:
-          - ReadWriteMany  # RWX
-        size: 100Gi 
-      html:
-        volsync:
-        - name: html
-          credentials: s3
-          type: restic
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            trigger:
-              schedule: 15 20 * * *
-        accessModes:
-          - ReadWriteMany  # RWX
-        size: 10Gi
         storageClass: longhorn
+        size: 100Gi
+        accessModes:
+          - ReadWriteMany
+
     # cnpg:
     #   main:
     #     # mode: recovery      
@@ -126,7 +107,7 @@ spec:
     #       credentials: s3
     #     user: nextcloud
     #     password: ${NEXTCLOUD_CNPG_PWD}
-    
+
     # podOptions:
     #     nodeSelector:
     #         kubernetes.io/hostname: "k8s-worker-3"
