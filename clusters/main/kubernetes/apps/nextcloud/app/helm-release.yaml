@@ -79,7 +79,7 @@ spec:
               schedule: 15 20 * * *
         accessModes:
           - ReadWriteMany  # RWX
-        size: 1Gi  # Example size, adjust as needed
+        size: 1Gi 
         storageClass: longhorn
       data:
         enabled: true
@@ -88,7 +88,7 @@ spec:
         server: ${TRUENAS_IP}
         accessModes:
           - ReadWriteMany  # RWX
-        size: 100Gi  # Example size, adjust as needed
+        size: 100Gi 
       html:
         volsync:
         - name: html
@@ -102,33 +102,31 @@ spec:
               schedule: 15 20 * * *
         accessModes:
           - ReadWriteMany  # RWX
-        size: 10Gi  # Example size, adjust as needed
+        size: 10Gi
         storageClass: longhorn
-    cnpg:
-      main:
-        # mode: recovery      
-        backups:
-          enabled: true
-          credentials: s3
-          retentionPolicy: ""
-          revision: "1"
-          scheduledBackups:
-          - name: daily-backup
-            schedule: "0 15 20 * * *"
-            backupOwnerReference: self
-            immediate: true
-            suspend: false
-        monitoring:
-          disableDefaultQueries: false
-          enablePodMonitor: true
-        password: ${NEXTCLOUD_CNPG_PWD}
-        pgVersion: 15
-        recovery:
-          credentials: s3
-          enabled: true
-          # revision: "1"
-          serverName: ""
-        user: nextcloud
+    # cnpg:
+    #   main:
+    #     # mode: recovery      
+    #     backups:
+    #       enabled: true
+    #       credentials: s3
+    #       retentionPolicy: ""
+    #       revision: "1"
+    #       scheduledBackups:
+    #       - name: daily-backup
+    #         schedule: "0 15 20 * * *"
+    #         backupOwnerReference: self
+    #         immediate: true
+    #         suspend: false
+    #     monitoring:
+    #       disableDefaultQueries: false
+    #       enablePodMonitor: true
+    #     pgVersion: 15
+    #     recovery:
+    #       credentials: s3
+    #     user: nextcloud
+    #     password: ${NEXTCLOUD_CNPG_PWD}
+    
     # podOptions:
     #     nodeSelector:
     #         kubernetes.io/hostname: "k8s-worker-3"
