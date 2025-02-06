@@ -76,27 +76,27 @@ spec:
             enabled: true
             trigger:
               schedule: 30 20 * * *
-            type: restic        
-        data:
-          enabled: true
-          type: nfs                
-          path: /mnt/data1/nc_userdata
-          server: ${TRUENAS_IP}
-        html:
-          volsync:
-          - credentials: s3
-            dest:
-              enabled: true
-            name: html
-            src:
-              enabled: true
-              trigger:
-                schedule: 30 20 * * *
-            type: restic
+          type: restic        
+      data:
+        enabled: true
+        type: nfs                
+        path: /mnt/data1/nc_userdata
+        server: ${TRUENAS_IP}
+      html:
+        volsync:
+        - credentials: s3
+          dest:
+            enabled: true
+          name: html
+          src:
+            enabled: true
+            trigger:
+              schedule: 30 20 * * *
+          type: restic
     cnpg:
       main:
         backups:
-          enabled: true
+          enabled: false
           credentials: s3
           retentionPolicy: ""
           revision: "5"
