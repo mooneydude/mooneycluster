@@ -71,12 +71,14 @@ spec:
         storageClass: longhorn-nfs
         accessMode: ReadWriteMany
         size: 10Gi
+        mountPath: /data
       config:
         enabled: true
         type: pvc
         storageClass: longhorn-nfs
         accessMode: ReadWriteMany
         size: 1Gi
+        mountPath: /config
     cnpg:
       main:
         mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
