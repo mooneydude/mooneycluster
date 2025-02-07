@@ -35,3 +35,17 @@ spec:
       defaultClass: true
       # Increase to 3 for a multi-node cluster
       defaultClassReplicaCount: 3
+    # Add NFS provisioner configuration
+    nfs:
+      enabled: true
+      provisioner:
+        enabled: true
+        replicaCount: 3
+        storageClass:
+          enabled: true
+          name: longhorn-nfs
+          defaultClass: false
+          reclaimPolicy: Retain
+          allowVolumeExpansion: true
+          mountOptions:
+            - nfsvers=4.1      
