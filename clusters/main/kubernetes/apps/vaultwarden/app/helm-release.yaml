@@ -102,10 +102,11 @@ spec:
               immediate: true
               suspend: false           
           retentionPolicy: "7d"
-          revision: "1"
+          revision: "2"
         recovery:
           method: object_store
-          credentials: s3
+          credentials: 
+          revision: "1"
     workload:
       main:
         type: Deployment
