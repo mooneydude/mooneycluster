@@ -44,7 +44,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: mycloud.${DOMAIN_1}
+          - host: thecloud.${DOMAIN_1}
             paths:
             - path: /
               pathType: Prefix
@@ -66,27 +66,27 @@ spec:
       notify_push:
         enabled: true
 
-    # persistence:
-    #   html:
-    #     enabled: true      
-    #     type: nfs
-    #     server: ${TRUENAS_IP}
-    #     path: /mnt/data1/nextcloud
-    #     accessModes:
-    #       - ReadWriteMany  # RWX
-    #     size: 10Gi
-    #   config:
-    #     enabled: true
-    #     storageClass: longhorn
-    #     size: 1Gi
-    #     accessModes:
-    #       - ReadWriteMany
-    #   data:
-    #     enabled: true
-    #     storageClass: longhorn
-    #     size: 100Gi
-    #     accessModes:
-    #       - ReadWriteMany
+    persistence:
+      html:
+        enabled: true      
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/nextcloud
+        accessModes:
+          - ReadWriteMany  # RWX
+        size: 10Gi
+      config:
+        enabled: true
+        storageClass: longhorn
+        size: 1Gi
+        accessModes:
+          - ReadWriteMany
+      data:
+        enabled: true
+        storageClass: longhorn
+        size: 100Gi
+        accessModes:
+          - ReadWriteMany
 
     # cnpg:
     #   main:
@@ -111,9 +111,9 @@ spec:
     #     user: nextcloud
     #     password: ${NEXTCLOUD_CNPG_PWD}
 
-    podOptions:
-        nodeSelector:
-            kubernetes.io/hostname: "k8s-worker-3"
+    # podOptions:
+    #     nodeSelector:
+    #         kubernetes.io/hostname: "k8s-worker-3"
 
     # workload:
     #   main:
