@@ -97,7 +97,7 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 15 0 * * *"
+              schedule: "0 15 2 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false           
@@ -105,7 +105,7 @@ spec:
           revision: "2"
         recovery:
           method: object_store
-          credentials: 
+          credentials: s3
           revision: "1"
     workload:
       main:
