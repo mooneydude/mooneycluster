@@ -64,28 +64,29 @@ spec:
         accessIP: ${TRAEFIK_IP}
         default_phone_region: US
       notify_push:
-        enabled: true
-    persistence:
-      html:
-        enabled: true      
-        type: nfs
-        server: ${TRUENAS_IP}
-        path: /mnt/data1/nextcloud
-        accessModes:
-          - ReadWriteMany  # RWX
-        size: 10Gi
-      config:
-        enabled: true
-        storageClass: longhorn
-        size: 1Gi
-        accessModes:
-          - ReadWriteMany
-      data:
-        enabled: true
-        storageClass: longhorn
-        size: 100Gi
-        accessModes:
-          - ReadWriteMany
+        enabled: 
+        
+    # persistence:
+    #   html:
+    #     enabled: true      
+    #     type: nfs
+    #     server: ${TRUENAS_IP}
+    #     path: /mnt/data1/nextcloud
+    #     accessModes:
+    #       - ReadWriteMany  # RWX
+    #     size: 10Gi
+    #   config:
+    #     enabled: true
+    #     storageClass: longhorn
+    #     size: 1Gi
+    #     accessModes:
+    #       - ReadWriteMany
+    #   data:
+    #     enabled: true
+    #     storageClass: longhorn
+    #     size: 100Gi
+    #     accessModes:
+    #       - ReadWriteMany
 
     # cnpg:
     #   main:
@@ -110,61 +111,62 @@ spec:
     #     user: nextcloud
     #     password: ${NEXTCLOUD_CNPG_PWD}
 
-    # podOptions:
-    #     nodeSelector:
-    #         kubernetes.io/hostname: "k8s-worker-3"
-    workload:
-      main:
-        type: Deployment
-        strategy: RollingUpdate
-        replicas: 2
-        podSpec:
-          containers:
-            main:
-              enabled: true
-              primary: true
-              envFrom:
-                - configMapRef:
-                    name: nextcloud-config
-              probes:
-                liveness:
-                  enabled: true
-                  type: exec
-                  command: /healthcheck.sh
-                readiness:
-                  enabled: true
-                  type: exec
-                  command: /healthcheck.sh
-                startup:
-                  enabled: true
-                  type: tcp
-                  port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
-      nginx:
-        enabled: true
-        type: Deployment
-        strategy: RollingUpdate
-        replicas: 2
-        podSpec:
-          containers:
-            nginx:
-              enabled: true
-              primary: true
-              imageSelector: nginxImage
-              probes:
-                readiness:
-                  enabled: true
-                  path: /robots.txt
-                  port: "{{ .Values.service.main.ports.main.port }}"
-                  httpHeaders:
-                    Host: kube.internal.healthcheck
-                liveness:
-                  enabled: true
-                  path: /robots.txt
-                  port: "{{ .Values.service.main.ports.main.port }}"
-                  httpHeaders:
-                    Host: kube.internal.healthcheck
-                startup:
-                  enabled: true
-                  type: tcp
-                  port: "{{ .Values.service.main.ports.main.port }}"
+    podOptions:
+        nodeSelector:
+            kubernetes.io/hostname: "k8s-worker-3"
+
+    # workload:
+    #   main:
+    #     type: Deployment
+    #     strategy: RollingUpdate
+    #     replicas: 2
+    #     podSpec:
+    #       containers:
+    #         main:
+    #           enabled: true
+    #           primary: true
+    #           envFrom:
+    #             - configMapRef:
+    #                 name: nextcloud-config
+    #           probes:
+    #             liveness:
+    #               enabled: true
+    #               type: exec
+    #               command: /healthcheck.sh
+    #             readiness:
+    #               enabled: true
+    #               type: exec
+    #               command: /healthcheck.sh
+    #             startup:
+    #               enabled: true
+    #               type: tcp
+    #               port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
+    #   nginx:
+    #     enabled: true
+    #     type: Deployment
+    #     strategy: RollingUpdate
+    #     replicas: 2
+    #     podSpec:
+    #       containers:
+    #         nginx:
+    #           enabled: true
+    #           primary: true
+    #           imageSelector: nginxImage
+    #           probes:
+    #             readiness:
+    #               enabled: true
+    #               path: /robots.txt
+    #               port: "{{ .Values.service.main.ports.main.port }}"
+    #               httpHeaders:
+    #                 Host: kube.internal.healthcheck
+    #             liveness:
+    #               enabled: true
+    #               path: /robots.txt
+    #               port: "{{ .Values.service.main.ports.main.port }}"
+    #               httpHeaders:
+    #                 Host: kube.internal.healthcheck
+    #             startup:
+    #               enabled: true
+    #               type: tcp
+    #               port: "{{ .Values.service.main.ports.main.port }}"
 
