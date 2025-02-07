@@ -66,19 +66,17 @@ spec:
           token: ${VW_TOKEN}
     persistence:
       data:
-        enabled: true
-        type: pvc
-        storageClass: longhorn-nfs
-        accessMode: ReadWriteMany
-        size: 10Gi
-        mountPath: /data
-      config:
-        enabled: true
-        type: pvc
-        storageClass: longhorn-nfs
-        accessMode: ReadWriteMany
-        size: 1Gi
-        mountPath: /config
+        readOnly: false
+        accessModes:
+          - ReadWriteMany
+        volsync:
+            - name: b2
+              type: restic
+              credentials: s3
+              dest:
+                enabled: false
+              src:
+                enabled: true  
     cnpg:
       main:
         mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
