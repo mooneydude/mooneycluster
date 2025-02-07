@@ -71,19 +71,19 @@ spec:
         storageClass: longhorn
         size: 10Gi
         accessModes:
-          - ReadWriteMany
+        - ReadWriteMany
       config:
         enabled: true
         storageClass: longhorn
         size: 1Gi
         accessModes:
-          - ReadWriteMany
+        - ReadWriteMany
       data:
         enabled: true
         storageClass: longhorn
         size: 100Gi
         accessModes:
-          - ReadWriteMany
+        - ReadWriteMany
 
     # cnpg:
     #   main:
@@ -122,8 +122,8 @@ spec:
               enabled: true
               primary: true
               envFrom:
-                - configMapRef:
-                    name: nextcloud-config
+              - configMapRef:
+                name: nextcloud-config
               probes:
                 liveness:
                   enabled: true
