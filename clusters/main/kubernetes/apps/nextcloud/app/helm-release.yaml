@@ -44,10 +44,10 @@ spec:
       main:
         enabled: true
         hosts:
-        - host: mycloud.${DOMAIN_1}
-          paths:
-          - path: /
-            pathType: Prefix
+          - host: mycloud.${DOMAIN_1}
+            paths:
+            - path: /
+              pathType: Prefix
         integrations:
           certManager:
             certificateIssuer: cloudflare
@@ -55,7 +55,7 @@ spec:
           traefik:
             enabled: true
             entrypoints:
-            - websecure
+              - websecure
     nextcloud:
       credentials:
         initialAdminPassword: ${ADMIN_PASSWORD}
@@ -71,19 +71,19 @@ spec:
         storageClass: longhorn
         size: 10Gi
         accessModes:
-        - ReadWriteMany
+          - ReadWriteMany
       config:
         enabled: true
         storageClass: longhorn
         size: 1Gi
         accessModes:
-        - ReadWriteMany
+          - ReadWriteMany
       data:
         enabled: true
         storageClass: longhorn
         size: 100Gi
         accessModes:
-        - ReadWriteMany
+          - ReadWriteMany
 
     # cnpg:
     #   main:
@@ -122,8 +122,8 @@ spec:
               enabled: true
               primary: true
               envFrom:
-              - configMapRef:
-                name: nextcloud-config
+                - configMapRef:
+                  name: nextcloud-config
               probes:
                 liveness:
                   enabled: true
