@@ -35,13 +35,3 @@ spec:
       defaultClass: true
       # Increase to 3 for a multi-node cluster
       defaultClassReplicaCount: 3
-    # Adding NFS RWX StorageClass configuration
-    storageClasses:
-    - name: longhorn-nfs
-      allowVolumeExpansion: true
-      parameters:
-        nfsOptions: "vers=4.2,hard,timeo=600,retrans=5"
-      reclaimPolicy: Retain
-      volumeBindingMode: Immediate
-      accessModes:
-      - ReadWriteMany
