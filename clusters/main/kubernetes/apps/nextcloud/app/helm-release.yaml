@@ -64,8 +64,8 @@ spec:
         accessIP: ${TRAEFIK_IP}
         default_phone_region: US
       notify_push:
-        enabled: 
-        
+        enabled: true
+
     # persistence:
     #   html:
     #     enabled: true      
