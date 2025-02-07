@@ -68,13 +68,11 @@ spec:
 
     persistence:
       html:
-        enabled: true      
-        type: nfs
-        server: ${TRUENAS_IP}
-        path: /mnt/data1/nextcloud
+        enabled: true
+        storageClass: longhorn
+        size: 10Gi
         accessModes:
           - ReadWriteMany  # RWX
-        size: 10Gi
       config:
         enabled: true
         storageClass: longhorn
@@ -115,32 +113,32 @@ spec:
     #     nodeSelector:
     #         kubernetes.io/hostname: "k8s-worker-3"
 
-    # workload:
-    #   main:
-    #     type: Deployment
-    #     strategy: RollingUpdate
-    #     replicas: 2
-    #     podSpec:
-    #       containers:
-    #         main:
-    #           enabled: true
-    #           primary: true
-    #           envFrom:
-    #             - configMapRef:
-    #                 name: nextcloud-config
-    #           probes:
-    #             liveness:
-    #               enabled: true
-    #               type: exec
-    #               command: /healthcheck.sh
-    #             readiness:
-    #               enabled: true
-    #               type: exec
-    #               command: /healthcheck.sh
-    #             startup:
-    #               enabled: true
-    #               type: tcp
-    #               port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
+    workload:
+      main:
+        type: Deployment
+        strategy: RollingUpdate
+        replicas: 2
+        podSpec:
+          containers:
+            main:
+              enabled: true
+              primary: true
+              envFrom:
+                - configMapRef:
+                    name: nextcloud-config
+              probes:
+                liveness:
+                  enabled: true
+                  type: exec
+                  command: /healthcheck.sh
+                readiness:
+                  enabled: true
+                  type: exec
+                  command: /healthcheck.sh
+                startup:
+                  enabled: true
+                  type: tcp
+                  port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
     #   nginx:
     #     enabled: true
     #     type: Deployment
