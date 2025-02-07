@@ -67,33 +67,21 @@ spec:
     persistence:
       data:
         enabled: true
-        type: nfs                
-        path: /mnt/data1/vaultwarden
-        server: ${TRUENAS_IP}
-        accessModes:
-          - ReadWriteMany  # RWX
-        size: 10Gi  # Example size, adjust as needed
-    # persistence:
-    #   data:
-    #     volsync:
-    #       - name: b2
-    #         type: restic
-    #         credentials: s3
-    #         dest:
-    #           enabled: true                          
-    #         src:
-    #           enabled: true
-    #           trigger:
-    #             schedule: "35 23 * * *"
-    #     storageClass: longhorn
-    #     accessModes:
-    #       - ReadWriteMany  # RWX
-    #     size: 10Gi                 
+        type: pvc
+        storageClass: longhorn-nfs
+        accessMode: ReadWriteMany
+        size: 10Gi
+      config:
+        enabled: true
+        type: pvc
+        storageClass: longhorn-nfs
+        accessMode: ReadWriteMany
+        size: 1Gi
     cnpg:
       main:
         mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: true  # Set to 'false' when performing new install (recovery)
+          enabled: false  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
@@ -102,11 +90,11 @@ spec:
               immediate: true
               suspend: false           
           retentionPolicy: "7d"
-          revision: "2"
+          revision: "3"
         recovery:
           method: object_store
           credentials: s3
-          revision: "1"
+          revision: "2"
     workload:
       main:
         type: Deployment
