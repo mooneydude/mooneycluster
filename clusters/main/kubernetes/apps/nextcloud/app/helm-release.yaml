@@ -67,11 +67,13 @@ spec:
         enabled: true
     persistence:
       html:
-        enabled: true
-        storageClass: longhorn
-        size: 10Gi
+        enabled: true      
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/nextcloud
         accessModes:
-          - ReadWriteMany
+          - ReadWriteMany  # RWX
+        size: 10Gi
       config:
         enabled: true
         storageClass: longhorn
