@@ -17,8 +17,8 @@ spec:
   install:
     createNamespace: true
     crds: CreateReplace
-    remediation:
-      retries: 3
+  remediation:
+    retries: 3
   upgrade:
     crds: CreateReplace
     remediation:
@@ -35,17 +35,13 @@ spec:
       defaultClass: true
       # Increase to 3 for a multi-node cluster
       defaultClassReplicaCount: 3
-    # Add NFS provisioner configuration
-    nfs:
-      enabled: true
-      provisioner:
-        enabled: true
-        replicaCount: 3
-        storageClass:
-          enabled: true
-          name: longhorn-nfs
-          defaultClass: false
-          reclaimPolicy: Retain
-          allowVolumeExpansion: true
-          mountOptions:
-            - nfsvers=4.1      
+    # Adding NFS RWX StorageClass configuration
+    storageClasses:
+    - name: longhorn-nfs
+      allowVolumeExpansion: true
+      parameters:
+        nfsOptions: "vers=4.2,hard,timeo=600,retrans=5"
+      reclaimPolicy: Retain
+      volumeBindingMode: Immediate
+      accessModes:
+      - ReadWriteMany
