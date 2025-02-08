@@ -64,6 +64,7 @@ spec:
         - name: config
           type: restic
           credentials: s3
+          readOnly: false
           accessModes:
             - ReadWriteMany          
           dest:
