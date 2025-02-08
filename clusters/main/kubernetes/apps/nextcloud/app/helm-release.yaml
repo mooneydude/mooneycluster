@@ -69,8 +69,8 @@ spec:
     persistence:
       html:
         readOnly: false
-        accessModes:
-          - ReadWriteMany
+        # accessModes:
+        #   - ReadWriteMany
         volsync:
             - name: html
               type: restic
@@ -81,8 +81,8 @@ spec:
                 enabled: true  
       config:
         readOnly: false
-        accessModes:
-          - ReadWriteMany
+        # accessModes:
+        #   - ReadWriteMany
         volsync:
             - name: config
               type: restic
@@ -93,8 +93,8 @@ spec:
                 enabled: true  
       data:
         readOnly: false
-        accessModes:
-          - ReadWriteMany
+        # accessModes:
+        #   - ReadWriteMany
         volsync:
             - name: data
               type: restic
