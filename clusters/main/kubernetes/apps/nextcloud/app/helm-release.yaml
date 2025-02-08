@@ -69,40 +69,40 @@ spec:
     persistence:
       html:
         readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
+        accessModes:
+          - ReadWriteMany
         volsync:
-            - name: html
-              type: restic
-              credentials: s3
-              dest:
-                enabled: false
-              src:
-                enabled: true  
+          - name: html
+            type: restic
+            credentials: s3
+            dest:
+              enabled: false
+            src:
+              enabled: true  
       config:
         readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
+        accessModes:
+          - ReadWriteMany
         volsync:
-            - name: config
-              type: restic
-              credentials: s3
-              dest:
-                enabled: false
-              src:
-                enabled: true  
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: false
+            src:
+              enabled: true  
       data:
         readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
+        accessModes:
+          - ReadWriteMany
         volsync:
-            - name: data
-              type: restic
-              credentials: s3
-              dest:
-                enabled: false
-              src:
-                enabled: true  
+          - name: data
+            type: restic
+            credentials: s3
+            dest:
+              enabled: false
+            src:
+              enabled: true  
 
     cnpg:
       main:
@@ -113,11 +113,11 @@ spec:
           retentionPolicy: ""
           revision: "1"
           scheduledBackups:
-          - name: daily-backup
-            schedule: "0 45 1 * * *"
-            backupOwnerReference: self
-            immediate: true
-            suspend: false
+            - name: daily-backup
+              schedule: "0 45 1 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false
         monitoring:
           disableDefaultQueries: false
           enablePodMonitor: true
