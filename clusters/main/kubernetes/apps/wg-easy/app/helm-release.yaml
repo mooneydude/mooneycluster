@@ -61,18 +61,18 @@ spec:
     persistence:
       config:
         volsync:
-        - name: config
-          type: restic
-          credentials: s3
-          readOnly: false
-          accessModes:
-            - ReadWriteMany          
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            # trigger:
-            #   schedule: 30 1 * * *
+          - name: config
+            type: restic
+            credentials: s3
+            readOnly: false
+            accessModes:
+              - ReadWriteMany          
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              # trigger:
+              #   schedule: 30 1 * * *
     workload:
       main:
         type: Deployment
