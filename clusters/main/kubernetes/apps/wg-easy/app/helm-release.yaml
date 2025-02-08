@@ -60,13 +60,13 @@ spec:
             certificateIssuer: cloudflare
     persistence:
       config:
+        readOnly: false
+        accessModes:
+          - ReadWriteMany
         volsync:
           - name: config
             type: restic
             credentials: s3
-            readOnly: false
-            accessModes:
-              - ReadWriteMany          
             dest:
               enabled: true
             src:
