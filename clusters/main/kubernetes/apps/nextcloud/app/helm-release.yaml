@@ -114,7 +114,7 @@ spec:
           revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 45 1 * * *"
+              schedule: "0 30 2 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
@@ -128,58 +128,58 @@ spec:
         user: nextcloud
         password: ${NEXTCLOUD_CNPG_PWD}
 
-    # workload:
-    #   main:
-    #     type: Deployment
-    #     strategy: RollingUpdate
-    #     replicas: 2
-    #     podSpec:
-    #       containers:
-    #         main:
-    #           enabled: true
-    #           primary: true
-    #           envFrom:
-    #             - configMapRef:
-    #                 name: nextcloud-config
-    #           probes:
-    #             liveness:
-    #               enabled: true
-    #               type: exec
-    #               command: /healthcheck.sh
-    #             readiness:
-    #               enabled: true
-    #               type: exec
-    #               command: /healthcheck.sh
-    #             startup:
-    #               enabled: true
-    #               type: tcp
-    #               port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
-    #   nginx:
-    #     enabled: true
-    #     type: Deployment
-    #     strategy: RollingUpdate
-    #     replicas: 2
-    #     podSpec:
-    #       containers:
-    #         nginx:
-    #           enabled: true
-    #           primary: true
-    #           imageSelector: nginxImage
-    #           probes:
-    #             readiness:
-    #               enabled: true
-    #               path: /robots.txt
-    #               port: "{{ .Values.service.main.ports.main.port }}"
-    #               httpHeaders:
-    #                 Host: kube.internal.healthcheck
-    #             liveness:
-    #               enabled: true
-    #               path: /robots.txt
-    #               port: "{{ .Values.service.main.ports.main.port }}"
-    #               httpHeaders:
-    #                 Host: kube.internal.healthcheck
-    #             startup:
-    #               enabled: true
-    #               type: tcp
-    #               port: "{{ .Values.service.main.ports.main.port }}"
+    workload:
+      main:
+        type: Deployment
+        strategy: RollingUpdate
+        replicas: 2
+        podSpec:
+          containers:
+            main:
+              enabled: true
+              primary: true
+              envFrom:
+                - configMapRef:
+                    name: nextcloud-config
+              probes:
+                liveness:
+                  enabled: true
+                  type: exec
+                  command: /healthcheck.sh
+                readiness:
+                  enabled: true
+                  type: exec
+                  command: /healthcheck.sh
+                startup:
+                  enabled: true
+                  type: tcp
+                  port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
+      nginx:
+        enabled: true
+        type: Deployment
+        strategy: RollingUpdate
+        replicas: 2
+        podSpec:
+          containers:
+            nginx:
+              enabled: true
+              primary: true
+              imageSelector: nginxImage
+              probes:
+                readiness:
+                  enabled: true
+                  path: /robots.txt
+                  port: "{{ .Values.service.main.ports.main.port }}"
+                  httpHeaders:
+                    Host: kube.internal.healthcheck
+                liveness:
+                  enabled: true
+                  path: /robots.txt
+                  port: "{{ .Values.service.main.ports.main.port }}"
+                  httpHeaders:
+                    Host: kube.internal.healthcheck
+                startup:
+                  enabled: true
+                  type: tcp
+                  port: "{{ .Values.service.main.ports.main.port }}"
 
