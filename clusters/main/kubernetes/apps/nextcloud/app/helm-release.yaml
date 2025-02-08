@@ -79,6 +79,9 @@ spec:
               enabled: false
             src:
               enabled: true  
+              trigger:
+                schedule: 30 2 * * *
+
       config:
         readOnly: false
         accessModes:
@@ -90,7 +93,10 @@ spec:
             dest:
               enabled: false
             src:
-              enabled: true  
+              enabled: true
+              trigger:
+                schedule: 30 2 * * *
+
       data:
         readOnly: false
         accessModes:
@@ -103,6 +109,8 @@ spec:
               enabled: false
             src:
               enabled: true  
+              trigger:
+                schedule: 30 2 * * *
 
     cnpg:
       main:
