@@ -48,7 +48,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: wireguard.${DOMAIN_1}
+          - host: wg1.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
