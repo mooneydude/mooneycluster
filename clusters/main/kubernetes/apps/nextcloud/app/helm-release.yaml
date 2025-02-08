@@ -80,7 +80,7 @@ spec:
             src:
               enabled: true  
               trigger:
-                schedule: 15 14 * * *
+                schedule: 15 17 * * *
 
       config:
         readOnly: false
@@ -95,7 +95,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 15 14 * * *
+                schedule: 15 17 * * *
 
       data:
         readOnly: false
@@ -110,7 +110,7 @@ spec:
             src:
               enabled: true  
               trigger:
-                schedule: 15 14 * * *
+                schedule: 15 17 * * *
 
     cnpg:
       main:
@@ -122,7 +122,7 @@ spec:
           revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 20 14 * * *"
+              schedule: "0 20 17 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
