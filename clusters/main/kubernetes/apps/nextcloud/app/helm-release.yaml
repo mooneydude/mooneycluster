@@ -68,77 +68,92 @@ spec:
 
     persistence:
       html:
-        enabled: true
-        storageClass: longhorn
-        size: 10Gi
+        readOnly: false
         accessModes:
-          - ReadWriteMany  # RWX
+          - ReadWriteMany
+        volsync:
+            - name: html
+              type: restic
+              credentials: s3
+              dest:
+                enabled: false
+              src:
+                enabled: true  
       config:
-        enabled: true
-        storageClass: longhorn
-        size: 1Gi
+        readOnly: false
         accessModes:
           - ReadWriteMany
+        volsync:
+            - name: config
+              type: restic
+              credentials: s3
+              dest:
+                enabled: false
+              src:
+                enabled: true  
       data:
-        enabled: true
-        storageClass: longhorn
-        size: 100Gi
+        readOnly: false
         accessModes:
           - ReadWriteMany
+        volsync:
+            - name: data
+              type: restic
+              credentials: s3
+              dest:
+                enabled: false
+              src:
+                enabled: true  
 
-    # cnpg:
-    #   main:
-    #     # mode: recovery      
-    #     backups:
-    #       enabled: true
-    #       credentials: s3
-    #       retentionPolicy: ""
-    #       revision: "1"
-    #       scheduledBackups:
-    #       - name: daily-backup
-    #         schedule: "0 15 20 * * *"
-    #         backupOwnerReference: self
-    #         immediate: true
-    #         suspend: false
-    #     monitoring:
-    #       disableDefaultQueries: false
-    #       enablePodMonitor: true
-    #     pgVersion: 15
-    #     recovery:
-    #       credentials: s3
-    #     user: nextcloud
-    #     password: ${NEXTCLOUD_CNPG_PWD}
-
-    # podOptions:
-    #     nodeSelector:
-    #         kubernetes.io/hostname: "k8s-worker-3"
-
-    workload:
+    cnpg:
       main:
-        type: Deployment
-        strategy: RollingUpdate
-        replicas: 2
-        podSpec:
-          containers:
-            main:
-              enabled: true
-              primary: true
-              envFrom:
-                - configMapRef:
-                    name: nextcloud-config
-              probes:
-                liveness:
-                  enabled: true
-                  type: exec
-                  command: /healthcheck.sh
-                readiness:
-                  enabled: true
-                  type: exec
-                  command: /healthcheck.sh
-                startup:
-                  enabled: true
-                  type: tcp
-                  port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
+        # mode: recovery      
+        backups:
+          enabled: true
+          credentials: s3
+          retentionPolicy: ""
+          revision: "1"
+          scheduledBackups:
+          - name: daily-backup
+            schedule: "0 45 1 * * *"
+            backupOwnerReference: self
+            immediate: true
+            suspend: false
+        monitoring:
+          disableDefaultQueries: false
+          enablePodMonitor: true
+        pgVersion: 15
+        recovery:
+          credentials: s3
+          # revision: "1"
+        user: nextcloud
+        password: ${NEXTCLOUD_CNPG_PWD}
+
+    # workload:
+    #   main:
+    #     type: Deployment
+    #     strategy: RollingUpdate
+    #     replicas: 2
+    #     podSpec:
+    #       containers:
+    #         main:
+    #           enabled: true
+    #           primary: true
+    #           envFrom:
+    #             - configMapRef:
+    #                 name: nextcloud-config
+    #           probes:
+    #             liveness:
+    #               enabled: true
+    #               type: exec
+    #               command: /healthcheck.sh
+    #             readiness:
+    #               enabled: true
+    #               type: exec
+    #               command: /healthcheck.sh
+    #             startup:
+    #               enabled: true
+    #               type: tcp
+    #               port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
     #   nginx:
     #     enabled: true
     #     type: Deployment
