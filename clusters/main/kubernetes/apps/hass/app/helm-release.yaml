@@ -93,11 +93,11 @@ spec:
               immediate: true
               suspend: false          
           retentionPolicy: "14d"
-          revison: "2"
+          revison: "1"
         recovery:
           credentials: s3
           enabled: true
-          revision: "1"
+          # revision: "1"
     workload:
       main:
         type: Deployment
