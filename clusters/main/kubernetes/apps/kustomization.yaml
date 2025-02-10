@@ -10,5 +10,5 @@ resources:
   - docuseal/ks.yaml
   - jellyfin/ks.yaml
   - vaultwarden/ks.yaml
-  # - xepg/ks.yaml
+  - xepg/ks.yaml
   - xteve/ks.yaml
