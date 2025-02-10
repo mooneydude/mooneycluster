@@ -93,16 +93,16 @@ spec:
               immediate: true
               suspend: false          
           retentionPolicy: "14d"
-          revison: "1"
+          revison: "2"
         recovery:
           credentials: s3
-          enabled: true
-          # revision: "1"
+          method: object_store
+          revision: "1"
     workload:
       main:
-        type: Deployment
-        strategy: RollingUpdate
-        replicas: 2      
+        # type: Deployment
+        # strategy: RollingUpdate
+        # replicas: 2      
         podSpec:
           nodeSelector:
             feature.node.kubernetes.io/usb-ff_10c4_ea60.present: "true"
