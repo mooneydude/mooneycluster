@@ -12,4 +12,4 @@ resources:
   - vaultwarden/ks.yaml
   - xepg/ks.yaml
   - xteve/ks.yaml
-  - esphome/ks.yaml
+  # - esphome/ks.yaml
