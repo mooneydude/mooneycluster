@@ -14,4 +14,4 @@ resources:
   - xteve/ks.yaml
   # - esphome/ks.yaml
   # - whisper/ks.yaml
-  - openwakeword/ks.yaml
+  # - openwakeword/ks.yaml
