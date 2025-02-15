@@ -35,17 +35,17 @@ spec:
 
     TZ: America/Chicago
 
-    # service:
-    #   main:
-    #     enabled: true
-    #     loadBalancerIP: ${ESPHOME_IP}
-    #     type: LoadBalancer
-    #     ports:
-    #       main:
-    #         enabled: true
-    #         port: 6052
-    #         protocol: tcp
-    #         targetPort: 6052
+    service:
+      main:
+        enabled: true
+        loadBalancerIP: ${ESPHOME_IP}
+        type: LoadBalancer
+        ports:
+          main:
+            enabled: true
+            port: 6052
+            protocol: tcp
+            targetPort: 6052
     ingress:
       main:
         enabled: true
