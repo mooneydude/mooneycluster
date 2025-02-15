@@ -42,6 +42,17 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
+    service:
+      main:
+        enabled: true
+        loadBalancerIP: ${HASS_IP}
+        type: LoadBalancer
+        ports:
+          main:
+            enabled: true
+            port: 8123
+            protocol: tcp
+            targetPort: 8123
     ingress:
       main:
         enabled: true
