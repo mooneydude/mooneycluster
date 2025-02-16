@@ -54,19 +54,20 @@ spec:
             certificateIssuer: cloudflare         
     persistence:
       data:
+        readOnly: false
+        accessModes:
+          - ReadWriteMany
         # mountPath: /data
         volsync:
         - name: data
           type: restic
-          cleanupTempPVC: true
-          cleanupCachePVC: true
           credentials: s3
           dest:
             enabled: true
           src:
             enabled: true
             trigger:
-              schedule: 15 15 * * *        
+              schedule: "15 15 * * *"        
     cnpg:
       main:
         # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
