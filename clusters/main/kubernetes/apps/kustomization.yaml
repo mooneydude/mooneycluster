@@ -4,7 +4,7 @@ resources:
   - kubernetes-dashboard/ks.yaml
   - cloudflared/ks.yaml
   - wg-easy/ks.yaml
-  # - hass/ks.yaml
+  - hass/ks.yaml
   # - nextcloud/ks.yaml
   - nc-talk/ks.yaml
   - docuseal/ks.yaml

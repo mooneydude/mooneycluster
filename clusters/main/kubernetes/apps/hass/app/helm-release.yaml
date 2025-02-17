@@ -104,7 +104,7 @@ spec:
               immediate: true
               suspend: false          
           retentionPolicy: "14d"
-          revison: "1"
+          # revison: "1"
         recovery:
           credentials: s3
           method: object_store
