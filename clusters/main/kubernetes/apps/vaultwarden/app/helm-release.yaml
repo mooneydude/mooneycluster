@@ -90,7 +90,7 @@ spec:
               immediate: true
               suspend: false           
           retentionPolicy: "7d"
-          revision: "3"
+          revision: "4"
         recovery:
           method: object_store
           credentials: s3

@@ -57,7 +57,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: ha.${DOMAIN_1}
+          - host: ha1.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
@@ -74,6 +74,9 @@ spec:
       - 172.17.0.0/16
     persistence:
       config:
+        readOnly: false
+        accessModes:
+          - ReadWriteMany        
         volsync:
           - name: b2
             type: restic
@@ -83,10 +86,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: "15 17 * * *"
-        readOnly: false
-        accessModes:
-          - ReadWriteMany        
+                schedule: "15 17 * * *"      
       zigbeedongle:
         enabled: true
         type: device
