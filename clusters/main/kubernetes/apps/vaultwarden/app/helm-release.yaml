@@ -70,13 +70,13 @@ spec:
         accessModes:
           - ReadWriteMany
         volsync:
-            - name: b2
-              type: restic
-              credentials: s3
-              dest:
-                enabled: false
-              src:
-                enabled: true  
+          - name: b2
+            type: restic
+            credentials: s3
+            dest:
+              enabled: false
+            src:
+              enabled: true  
     cnpg:
       main:
         mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
