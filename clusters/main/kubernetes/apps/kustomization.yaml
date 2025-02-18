@@ -13,3 +13,4 @@ resources:
   # - xepg/ks.yaml
   # - xteve/ks.yaml
   # - esphome/ks.yaml
+  - openwakeword/ks.yaml
