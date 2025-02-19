@@ -56,75 +56,130 @@ spec:
             enabled: true
             entrypoints:
               - websecure
+    nextcloud:
+      credentials:
+        initialAdminPassword: ${NEXTCLOUD_PWD}
+        initialAdminUser: ${NEXTCLOUD_USER}
+      general:
+        accessIP: ${TRAEFIK_IP}
+        default_phone_region: US
+      notify_push:
+        enabled: true
+
+    persistence:
+      html:
+        readOnly: false
+        accessModes:
+          - ReadWriteMany
+        volsync:
+          - name: html
+            type: restic
+            cleanupTempPVC: true
+            cleanupCachePVC: true            
+            credentials: s3
+            dest:
+              enabled: false
+            src:
+              enabled: true  
+              trigger:
+                schedule: 50 23 * * *
+      config:
+        readOnly: false
+        accessModes:
+          - ReadWriteMany
+        volsync:
+          - name: config
+            type: restic
+            cleanupTempPVC: true
+            cleanupCachePVC: true            
+            credentials: s3
+            dest:
+              enabled: false
+            src:
+              enabled: true
+              trigger:
+                schedule: 50 23 * * *
+      data:
+        enabled: true
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/nc_userdata
+        mountPath: /var/www/html/data 
     cnpg:
       main:
-        # mode: recovery
+        # mode: recovery      
         backups:
           enabled: true
           credentials: s3
+          retentionPolicy: ""
+          revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 30 23 * * *"
+              schedule: "0 50 23 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
+        monitoring:
+          disableDefaultQueries: false
+          enablePodMonitor: true
+        # pgVersion: 15
         recovery:
-          method: object_store
           credentials: s3
-    persistence:
-      config:
-        volsync:
-        - name: config
-          type: restic
-          cleanupTempPVC: true
-          cleanupCachePVC: true
-          credentials: s3
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            trigger:
-              schedule: 30 23 * * *
-      html:
-        volsync:
-        - name: html
-          type: restic
-          cleanupTempPVC: true
-          cleanupCachePVC: true
-          credentials: s3
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            trigger:
-              schedule: 30 23 * * *
-      data:
-        type: nfs
-        path: /mnt/data1/nc_userdata
-        server: ${TRUENAS_IP}
-    nextcloud:
-      credentials:
-        initialAdminUser: ${NEXTCLOUD_USER}
-        initialAdminPassword: ${NEXTCLOUD_PWD}
-      general:
-        default_phone_region: US
-        accessIP: "${TRAEFIK_IP}"
-      files:
-        shared_folder_name: Shared
-        max_chunk_size: 10485760
-      previews:
-        # https://github.com/nextcloud/server/blob/master/config/config.sample.php#L1269
-        # Only the last part of the provider is needed
-        providers:
-          - BMP
-          - GIF
-          - JPEG
-          - MarkDown
-          - MP3
-          - OpenDocument
-          - PNG
-          - TXT
-          - XBitmap
-          - PDF
-      clamav:
-        enabled: true
+          revision: "1"
+        user: nextcloud
+        password: ${NEXTCLOUD_CNPG_PWD}
+
+    # workload:
+    #   main:
+    #     type: Deployment
+    #     strategy: RollingUpdate
+    #     replicas: 2
+    #     podSpec:
+    #       containers:
+    #         main:
+    #           enabled: true
+    #           primary: true
+    #           envFrom:
+    #             - configMapRef:
+    #                 name: nextcloud-config
+    #           probes:
+    #             liveness:
+    #               enabled: true
+    #               type: exec
+    #               command: /healthcheck.sh
+    #             readiness:
+    #               enabled: true
+    #               type: exec
+    #               command: /healthcheck.sh
+    #             startup:
+    #               enabled: true
+    #               type: tcp
+    #               port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
+    #   nginx:
+    #     enabled: true
+    #     type: Deployment
+    #     strategy: RollingUpdate
+    #     replicas: 2
+    #     podSpec:
+    #       containers:
+    #         nginx:
+    #           enabled: true
+    #           primary: true
+    #           imageSelector: nginxImage
+    #           probes:
+    #             readiness:
+    #               enabled: true
+    #               path: /robots.txt
+    #               port: "{{ .Values.service.main.ports.main.port }}"
+    #               httpHeaders:
+    #                 Host: kube.internal.healthcheck
+    #             liveness:
+    #               enabled: true
+    #               path: /robots.txt
+    #               port: "{{ .Values.service.main.ports.main.port }}"
+    #               httpHeaders:
+    #                 Host: kube.internal.healthcheck
+    #             startup:
+    #               enabled: true
+    #               type: tcp
+    #               port: "{{ .Values.service.main.ports.main.port }}"
