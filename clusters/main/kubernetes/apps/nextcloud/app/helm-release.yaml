@@ -80,7 +80,7 @@ spec:
             src:
               enabled: true  
               trigger:
-                schedule: 0 19 * * *
+                schedule: 50 19 * * *
       config:
         # readOnly: false
         # accessModes:
@@ -94,7 +94,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 19 * * *
+                schedule: 50 19 * * *
       data:
         enabled: true
         type: nfs
@@ -111,7 +111,7 @@ spec:
           revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 19 * * *"
+              schedule: "0 50 19 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
