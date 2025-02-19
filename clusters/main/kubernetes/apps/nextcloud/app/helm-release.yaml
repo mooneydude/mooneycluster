@@ -60,7 +60,7 @@ spec:
       main:
         # cluster:
         #   singleNode: true
-        pgVersion: 15
+        # pgVersion: 15
         # mode: recovery
         backups:
           enabled: true
@@ -107,24 +107,28 @@ spec:
             trigger:
               schedule: 15 22 * * *
     nextcloud:
-      collabora:
-        enabled: true
-        password: "${ADMIN_PASSWORD}"
       credentials:
-        initialAdminPassword: "${ADMIN_PASSWORD}"
-        initialAdminUser: "${NEXTCLOUD_USER}"
+        initialAdminUser: ${NEXTCLOUD_USER}
+        initialAdminPassword: ${NEXTCLOUD_PWD}
       general:
-        accessIP: ${TRAEFIK_IP}
         default_phone_region: US
+        accessIP: "${TRAEFIK_IP}"
+      files:
+        shared_folder_name: Shared
+        max_chunk_size: 10485760
       previews:
+        # https://github.com/nextcloud/server/blob/master/config/config.sample.php#L1269
+        # Only the last part of the provider is needed
         providers:
-        - BMP
-        - GIF
-        - JPEG
-        - Krita
-        - MarkDown
-        - MP3
-        - OpenDocument
-        - PNG
-        - TXT
-        - XBitmap
+          - BMP
+          - GIF
+          - JPEG
+          - MarkDown
+          - MP3
+          - OpenDocument
+          - PNG
+          - TXT
+          - XBitmap
+          - PDF
+      clamav:
+        enabled: true
