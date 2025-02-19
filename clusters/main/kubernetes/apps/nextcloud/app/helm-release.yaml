@@ -103,12 +103,12 @@ spec:
         mountPath: /var/www/html/data 
     cnpg:
       main:
-        # mode: recovery      
+        mode: recovery      
         backups:
-          enabled: true
+          enabled: false
           credentials: s3
           retentionPolicy: ""
-          revision: "1"
+          revision: "2"
           scheduledBackups:
             - name: daily-backup
               schedule: "0 50 19 * * *"
@@ -121,7 +121,7 @@ spec:
         pgVersion: 15
         recovery:
           credentials: s3
-          # revision: "1"
+          revision: "1"
         user: nextcloud
         password: ${NEXTCLOUD_CNPG_PWD}
 
