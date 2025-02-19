@@ -56,126 +56,75 @@ spec:
             enabled: true
             entrypoints:
               - websecure
-    nextcloud:
-      credentials:
-        initialAdminPassword: ${ADMIN_PASSWORD}
-        initialAdminUser: admin
-      general:
-        accessIP: ${TRAEFIK_IP}
-        default_phone_region: US
-      notify_push:
-        enabled: false
-
-    persistence:
-      html:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
-        volsync:
-          - name: html
-            type: restic
+      cnpg:
+        main:
+          # cluster:
+          #   singleNode: true
+          pgVersion: 15
+          # mode: recovery
+          backups:
+            enabled: true
             credentials: s3
-            dest:
-              enabled: false
-            src:
-              enabled: true  
-              trigger:
-                schedule: 40 20 * * *
-      config:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
-        volsync:
+            scheduledBackups:
+              - name: daily-backup
+                schedule: "0 15 22 * * *"
+                backupOwnerReference: self
+                immediate: true
+                suspend: false
+          recovery:
+            method: object_store
+            credentials: s3
+      persistence:
+        config:
+          volsync:
           - name: config
             type: restic
+            cleanupTempPVC: true
+            cleanupCachePVC: true
             credentials: s3
             dest:
-              enabled: false
+              enabled: true
             src:
               enabled: true
               trigger:
-                schedule: 40 20 * * *
-      data:
-        enabled: true
-        type: nfs
-        server: ${TRUENAS_IP}
-        path: /mnt/data1/nc_userdata
-        mountPath: /var/www/html/data 
-    cnpg:
-      main:
-        mode: recovery      
-        backups:
-          enabled: false
-          credentials: s3
-          retentionPolicy: ""
-          revision: "3"
-          scheduledBackups:
-            - name: daily-backup
-              schedule: "0 40 20 * * *"
-              backupOwnerReference: self
-              immediate: true
-              suspend: false
-        monitoring:
-          disableDefaultQueries: false
-          enablePodMonitor: true
-        recovery:
-          credentials: s3
-          revision: "2"
-        user: nextcloud
-        password: ${NEXTCLOUD_CNPG_PWD}
-
-    # workload:
-    #   main:
-    #     type: Deployment
-    #     strategy: RollingUpdate
-    #     replicas: 2
-    #     podSpec:
-    #       containers:
-    #         main:
-    #           enabled: true
-    #           primary: true
-    #           envFrom:
-    #             - configMapRef:
-    #                 name: nextcloud-config
-    #           probes:
-    #             liveness:
-    #               enabled: true
-    #               type: exec
-    #               command: /healthcheck.sh
-    #             readiness:
-    #               enabled: true
-    #               type: exec
-    #               command: /healthcheck.sh
-    #             startup:
-    #               enabled: true
-    #               type: tcp
-    #               port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
-    #   nginx:
-    #     enabled: true
-    #     type: Deployment
-    #     strategy: RollingUpdate
-    #     replicas: 2
-    #     podSpec:
-    #       containers:
-    #         nginx:
-    #           enabled: true
-    #           primary: true
-    #           imageSelector: nginxImage
-    #           probes:
-    #             readiness:
-    #               enabled: true
-    #               path: /robots.txt
-    #               port: "{{ .Values.service.main.ports.main.port }}"
-    #               httpHeaders:
-    #                 Host: kube.internal.healthcheck
-    #             liveness:
-    #               enabled: true
-    #               path: /robots.txt
-    #               port: "{{ .Values.service.main.ports.main.port }}"
-    #               httpHeaders:
-    #                 Host: kube.internal.healthcheck
-    #             startup:
-    #               enabled: true
-    #               type: tcp
-    #               port: "{{ .Values.service.main.ports.main.port }}"
-
+                schedule: 15 22 * * *
+        data:
+          enabled: true
+          type: nfs
+          path: /mnt/data1/nc_userdata
+          server: ${TRUENAS_IP}
+        html:
+          volsync:
+          - name: html
+            type: restic
+            cleanupTempPVC: true
+            cleanupCachePVC: true
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 15 22 * * *
+      nextcloud:
+        collabora:
+          enabled: true
+          password: "${NEXTCLOUD_PWD}"
+        credentials:
+          initialAdminPassword: "${NEXTCLOUD_PWD}"
+          initialAdminUser: "${NEXTCLOUD_USER}"
+        general:
+          accessIP: ${TRAEFIK_IP}
+          default_phone_region: US
+        previews:
+          providers:
+          - BMP
+          - GIF
+          - JPEG
+          - Krita
+          - MarkDown
+          - MP3
+          - OpenDocument
+          - PNG
+          - TXT
+          - XBitmap
