@@ -59,7 +59,7 @@ spec:
     nextcloud:
       credentials:
         initialAdminPassword: ${ADMIN_PASSWORD}
-        initialAdminUser: admin
+        initialAdminUser: theadmin
       general:
         accessIP: ${TRAEFIK_IP}
         default_phone_region: US
