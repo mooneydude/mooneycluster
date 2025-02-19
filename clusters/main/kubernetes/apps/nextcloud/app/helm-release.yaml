@@ -59,7 +59,7 @@ spec:
     nextcloud:
       credentials:
         initialAdminPassword: ${ADMIN_PASSWORD}
-        initialAdminUser: theadmin
+        initialAdminUser: admin
       general:
         accessIP: ${TRAEFIK_IP}
         default_phone_region: US
@@ -103,12 +103,12 @@ spec:
         mountPath: /var/www/html/data 
     cnpg:
       main:
-        mode: recovery      
+        # mode: recovery      
         backups:
-          enabled: false
+          enabled: true
           credentials: s3
           retentionPolicy: ""
-          revision: "2"
+          revision: "1"
           scheduledBackups:
             - name: daily-backup
               schedule: "0 0 18 * * *"
@@ -121,7 +121,7 @@ spec:
         pgVersion: 15
         recovery:
           credentials: s3
-          revision: "1"
+          # revision: "1"
         user: nextcloud
         password: ${NEXTCLOUD_CNPG_PWD}
 
