@@ -35,7 +35,7 @@ spec:
       s3:
         type: s3
         url: "${S3URL}"
-        bucket: "${S3PREFIX}-wireguard"
+        bucket: "${S3PREFIX}-wg-easy"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
@@ -48,7 +48,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: wireguard.${DOMAIN_1}
+          - host: vpn.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
