@@ -36,7 +36,7 @@ spec:
       s3:
         type: s3
         url: "${S3URL}"
-        bucket: "${S3PREFIX}-nc1"
+        bucket: "${S3PREFIX}-nextcloud"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
@@ -81,7 +81,6 @@ spec:
               enabled: true  
               trigger:
                 schedule: 0 22 * * *
-
       config:
         readOnly: false
         accessModes:
@@ -96,22 +95,12 @@ spec:
               enabled: true
               trigger:
                 schedule: 0 22 * * *
-
       data:
-        readOnly: false
-        accessModes:
-          - ReadWriteMany
-        volsync:
-          - name: data
-            type: restic
-            credentials: s3
-            dest:
-              enabled: false
-            src:
-              enabled: true  
-              trigger:
-                schedule: 0 22 * * *
-
+        enabled: true
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/nc_userdata
+        mountPath: /var/www/html/data 
     cnpg:
       main:
         # mode: recovery      
@@ -119,10 +108,10 @@ spec:
           enabled: true
           credentials: s3
           retentionPolicy: ""
-          revision: "2"
+          revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 22 * * *"
+              schedule: "0 0 17 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
