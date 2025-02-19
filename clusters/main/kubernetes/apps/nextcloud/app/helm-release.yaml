@@ -58,16 +58,13 @@ spec:
               - websecure
     cnpg:
       main:
-        # cluster:
-        #   singleNode: true
-        # pgVersion: 15
         # mode: recovery
         backups:
           enabled: true
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 15 22 * * *"
+              schedule: "0 30 23 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
@@ -87,12 +84,7 @@ spec:
           src:
             enabled: true
             trigger:
-              schedule: 15 22 * * *
-      data:
-        enabled: true
-        type: nfs
-        path: /mnt/data1/nc_userdata
-        server: ${TRUENAS_IP}
+              schedule: 30 23 * * *
       html:
         volsync:
         - name: html
@@ -105,7 +97,11 @@ spec:
           src:
             enabled: true
             trigger:
-              schedule: 15 22 * * *
+              schedule: 30 23 * * *
+      data:
+        type: nfs
+        path: /mnt/data1/nc_userdata
+        server: ${TRUENAS_IP}
     nextcloud:
       credentials:
         initialAdminUser: ${NEXTCLOUD_USER}
