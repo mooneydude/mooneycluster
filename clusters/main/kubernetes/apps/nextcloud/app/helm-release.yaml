@@ -108,7 +108,7 @@ spec:
               schedule: 15 22 * * *
     nextcloud:
       collabora:
-        enabled: true
+        enabled: false
         password: "${NEXTCLOUD_PWD}"
       credentials:
         initialAdminPassword: "${NEXTCLOUD_PWD}"
