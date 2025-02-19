@@ -44,7 +44,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: mycloud.${DOMAIN_1}
+          - host: thecloud.${DOMAIN_1}
             paths:
             - path: /
               pathType: Prefix
@@ -80,7 +80,7 @@ spec:
             src:
               enabled: true  
               trigger:
-                schedule: 50 19 * * *
+                schedule: 30 20 * * *
       config:
         # readOnly: false
         # accessModes:
@@ -94,7 +94,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 50 19 * * *
+                schedule: 30 20 * * *
       data:
         enabled: true
         type: nfs
@@ -103,22 +103,21 @@ spec:
         mountPath: /var/www/html/data 
     cnpg:
       main:
-        mode: recovery      
+        # mode: recovery      
         backups:
-          enabled: false
+          enabled: true
           credentials: s3
           retentionPolicy: ""
-          revision: "2"
+          revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 50 19 * * *"
+              schedule: "0 30 20 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
         monitoring:
           disableDefaultQueries: false
           enablePodMonitor: true
-        pgVersion: 15
         recovery:
           credentials: s3
           revision: "1"
