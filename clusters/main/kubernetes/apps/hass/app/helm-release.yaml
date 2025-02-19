@@ -57,7 +57,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: ha.${DOMAIN_1}
+          - host: ha1.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
@@ -86,7 +86,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: "30 6 * * *"      
+                schedule: "0 16 * * *"      
       zigbeedongle:
         enabled: true
         type: device
@@ -99,7 +99,7 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 30 6 * * *"
+              schedule: "0 0 16 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
