@@ -80,7 +80,7 @@ spec:
             src:
               enabled: true  
               trigger:
-                schedule: 30 20 * * *
+                schedule: 40 20 * * *
       config:
         # readOnly: false
         # accessModes:
@@ -94,7 +94,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 30 20 * * *
+                schedule: 40 20 * * *
       data:
         enabled: true
         type: nfs
@@ -103,15 +103,15 @@ spec:
         mountPath: /var/www/html/data 
     cnpg:
       main:
-        # mode: recovery      
+        mode: recovery      
         backups:
           enabled: true
           credentials: s3
           retentionPolicy: ""
-          revision: "1"
+          revision: "2"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 30 20 * * *"
+              schedule: "0 40 20 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
