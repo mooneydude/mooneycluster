@@ -56,75 +56,75 @@ spec:
             enabled: true
             entrypoints:
               - websecure
-      cnpg:
-        main:
-          # cluster:
-          #   singleNode: true
-          pgVersion: 15
-          # mode: recovery
-          backups:
+    cnpg:
+      main:
+        # cluster:
+        #   singleNode: true
+        pgVersion: 15
+        # mode: recovery
+        backups:
+          enabled: true
+          credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 15 22 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false
+        recovery:
+          method: object_store
+          credentials: s3
+    persistence:
+      config:
+        volsync:
+        - name: config
+          type: restic
+          cleanupTempPVC: true
+          cleanupCachePVC: true
+          credentials: s3
+          dest:
             enabled: true
-            credentials: s3
-            scheduledBackups:
-              - name: daily-backup
-                schedule: "0 15 22 * * *"
-                backupOwnerReference: self
-                immediate: true
-                suspend: false
-          recovery:
-            method: object_store
-            credentials: s3
-      persistence:
-        config:
-          volsync:
-          - name: config
-            type: restic
-            cleanupTempPVC: true
-            cleanupCachePVC: true
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true
-              trigger:
-                schedule: 15 22 * * *
-        data:
-          enabled: true
-          type: nfs
-          path: /mnt/data1/nc_userdata
-          server: ${TRUENAS_IP}
-        html:
-          volsync:
-          - name: html
-            type: restic
-            cleanupTempPVC: true
-            cleanupCachePVC: true
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true
-              trigger:
-                schedule: 15 22 * * *
-      nextcloud:
-        collabora:
-          enabled: true
-          password: "${NEXTCLOUD_PWD}"
-        credentials:
-          initialAdminPassword: "${NEXTCLOUD_PWD}"
-          initialAdminUser: "${NEXTCLOUD_USER}"
-        general:
-          accessIP: ${TRAEFIK_IP}
-          default_phone_region: US
-        previews:
-          providers:
-          - BMP
-          - GIF
-          - JPEG
-          - Krita
-          - MarkDown
-          - MP3
-          - OpenDocument
-          - PNG
-          - TXT
-          - XBitmap
+          src:
+            enabled: true
+            trigger:
+              schedule: 15 22 * * *
+      data:
+        enabled: true
+        type: nfs
+        path: /mnt/data1/nc_userdata
+        server: ${TRUENAS_IP}
+      html:
+        volsync:
+        - name: html
+          type: restic
+          cleanupTempPVC: true
+          cleanupCachePVC: true
+          credentials: s3
+          dest:
+            enabled: true
+          src:
+            enabled: true
+            trigger:
+              schedule: 15 22 * * *
+    nextcloud:
+      collabora:
+        enabled: true
+        password: "${NEXTCLOUD_PWD}"
+      credentials:
+        initialAdminPassword: "${NEXTCLOUD_PWD}"
+        initialAdminUser: "${NEXTCLOUD_USER}"
+      general:
+        accessIP: ${TRAEFIK_IP}
+        default_phone_region: US
+      previews:
+        providers:
+        - BMP
+        - GIF
+        - JPEG
+        - Krita
+        - MarkDown
+        - MP3
+        - OpenDocument
+        - PNG
+        - TXT
+        - XBitmap
