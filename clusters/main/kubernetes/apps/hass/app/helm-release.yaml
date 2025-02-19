@@ -57,7 +57,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: ha1.${DOMAIN_1}
+          - host: ha.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
@@ -99,12 +99,12 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 16 * * *"
+              schedule: "0 15 16 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
           retentionPolicy: "14d"
-          revison: "1"
+          revision: "1"
         recovery:
           credentials: s3
           method: object_store
