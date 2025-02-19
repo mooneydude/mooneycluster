@@ -68,9 +68,9 @@ spec:
 
     persistence:
       html:
-        readOnly: false
-        accessModes:
-          - ReadWriteMany
+        # readOnly: false
+        # accessModes:
+        #   - ReadWriteMany
         volsync:
           - name: html
             type: restic
@@ -80,11 +80,11 @@ spec:
             src:
               enabled: true  
               trigger:
-                schedule: 0 22 * * *
+                schedule: 20 17 * * *
       config:
         readOnly: false
-        accessModes:
-          - ReadWriteMany
+        # accessModes:
+        #   - ReadWriteMany
         volsync:
           - name: config
             type: restic
@@ -94,7 +94,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 22 * * *
+                schedule: 20 17 * * *
       data:
         enabled: true
         type: nfs
@@ -111,7 +111,7 @@ spec:
           revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 17 * * *"
+              schedule: "0 20 17 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
