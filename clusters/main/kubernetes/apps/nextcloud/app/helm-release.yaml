@@ -44,7 +44,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: nextcloud.${DOMAIN_1}
+          - host: cloud.${DOMAIN_1}
             paths:
             - path: /
               pathType: Prefix
