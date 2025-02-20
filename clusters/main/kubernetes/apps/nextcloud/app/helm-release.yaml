@@ -44,7 +44,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: nextcloud.${DOMAIN_1}
+          - host: cloud1.${DOMAIN_1}
             paths:
             - path: /
               pathType: Prefix
@@ -67,67 +67,40 @@ spec:
         enabled: true
 
     persistence:
-      html:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
-        volsync:
-          - name: html
-            type: restic
-            cleanupTempPVC: true
-            cleanupCachePVC: true            
-            credentials: s3
-            dest:
-              enabled: false
-            src:
-              enabled: true  
-              trigger:
-                schedule: 45 17 * * *
       config:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
         volsync:
           - name: config
             type: restic
             cleanupTempPVC: true
-            cleanupCachePVC: true            
+            cleanupCachePVC: true
             credentials: s3
             dest:
-              enabled: false
-            src:
               enabled: true
-              trigger:
-                schedule: 45 17 * * *
+            src:
+              enabled: false
+      html:
+        volsync:
+          - name: html
+            type: restic
+            cleanupTempPVC: true
+            cleanupCachePVC: true
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: false
       data:
-        enabled: true
         type: nfs
         server: ${TRUENAS_IP}
         path: /mnt/data1/nc_userdata
-        mountPath: /var/www/html/data 
     cnpg:
       main:
-        # mode: recovery      
         backups:
-          enabled: false
+          enabled: true
           credentials: s3
-          retentionPolicy: ""
-          revision: "3"
-          scheduledBackups:
-            - name: daily-backup
-              schedule: "0 45 17 * * *"
-              backupOwnerReference: self
-              immediate: true
-              suspend: false
-        monitoring:
-          disableDefaultQueries: false
-          enablePodMonitor: true
         recovery:
-          credentials: s3
-          revision: "2"
-        user: nextcloud
-        password: ${NEXTCLOUD_CNPG_PWD}
-
+            method: object_store
+            credentials: s3
     # workload:
     #   main:
     #     type: Deployment
