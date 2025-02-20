@@ -44,7 +44,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: cloud1.${DOMAIN_1}
+          - host: nextcloud.${DOMAIN_1}
             paths:
             - path: /
               pathType: Prefix
@@ -98,7 +98,7 @@ spec:
       main:
         mode: recovery
         backups:
-          enabled: false
+          enabled: true
           credentials: s3
           scheduledBackups:
             - name: daily-backup
