@@ -107,7 +107,7 @@ spec:
         mountPath: /var/www/html/data 
     cnpg:
       main:
-        mode: recovery      
+        # mode: recovery      
         backups:
           enabled: false
           credentials: s3
