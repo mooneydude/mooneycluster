@@ -109,10 +109,10 @@ spec:
       main:
         mode: recovery      
         backups:
-          enabled: true
+          enabled: false
           credentials: s3
           retentionPolicy: ""
-          revision: "2"
+          revision: "3"
           scheduledBackups:
             - name: daily-backup
               schedule: "0 45 17 * * *"
@@ -124,7 +124,7 @@ spec:
           enablePodMonitor: true
         recovery:
           credentials: s3
-          revision: "1"
+          revision: "2"
         user: nextcloud
         password: ${NEXTCLOUD_CNPG_PWD}
 
