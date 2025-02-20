@@ -63,7 +63,6 @@ spec:
       general:
         accessIP: ${TRAEFIK_IP}
         default_phone_region: US
-
     persistence:
       config:
         volsync:
@@ -75,7 +74,7 @@ spec:
             dest:
               enabled: true
             src:
-              enabled: false
+              enabled: true
       html:
         volsync:
           - name: html
@@ -86,7 +85,7 @@ spec:
             dest:
               enabled: true
             src:
-              enabled: false
+              enabled: true
       data:
         type: nfs
         server: ${TRUENAS_IP}
