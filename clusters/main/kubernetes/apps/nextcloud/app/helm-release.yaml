@@ -82,7 +82,7 @@ spec:
             src:
               enabled: true  
               trigger:
-                schedule: 0 0 * * *
+                schedule: 15 0 * * *
       config:
         # readOnly: false
         # accessModes:
@@ -98,7 +98,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 0 * * *
+                schedule: 15 0 * * *
       data:
         enabled: true
         type: nfs
@@ -115,14 +115,13 @@ spec:
           revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 0 * * *"
+              schedule: "0 15 0 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
         monitoring:
           disableDefaultQueries: false
           enablePodMonitor: true
-        # pgVersion: 15
         recovery:
           credentials: s3
           revision: "1"
