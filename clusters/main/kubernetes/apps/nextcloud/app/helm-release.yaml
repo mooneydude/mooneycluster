@@ -76,7 +76,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 20 * * *
+                schedule: 0 17 * * *
       html:
         volsync:
           - name: html
@@ -89,7 +89,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 20 * * *
+                schedule: 0 17 * * *
       data:
         type: nfs
         server: ${TRUENAS_IP}
@@ -102,7 +102,7 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 20 * * *"
+              schedule: "0 0 17 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
