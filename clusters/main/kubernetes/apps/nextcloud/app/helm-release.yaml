@@ -109,6 +109,9 @@ spec:
         recovery:
             method: object_store
             credentials: s3
+    podOptions:
+        nodeSelector:
+            kubernetes.io/hostname: "k8s-worker-3"            
     # workload:
     #   main:
     #     type: Deployment
