@@ -44,7 +44,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: cloud2.${DOMAIN_1}
+          - host: cloud1.${DOMAIN_1}
             paths:
             - path: /
               pathType: Prefix
@@ -76,7 +76,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 16 * * *
+                schedule: 45 16 * * *
       html:
         volsync:
           - name: html
@@ -89,7 +89,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 16 * * *
+                schedule: 45 16 * * *
       data:
         type: nfs
         server: ${TRUENAS_IP}
@@ -103,7 +103,7 @@ spec:
           revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 16 * * *"
+              schedule: "0 45 16 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
