@@ -76,7 +76,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 17 * * *
+                schedule: 0 16 * * *
       html:
         volsync:
           - name: html
@@ -89,29 +89,30 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 0 17 * * *
+                schedule: 0 16 * * *
       data:
         type: nfs
         server: ${TRUENAS_IP}
         path: /mnt/data1/nc_userdata
     cnpg:
       main:
-        mode: recovery
+        # mode: recovery
         backups:
-          enabled: false
+          enabled: true
           credentials: s3
+          revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 0 17 * * *"
+              schedule: "0 0 16 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
         recovery:
             method: object_store
             credentials: s3
-    # podOptions:
-    #     nodeSelector:
-    #         kubernetes.io/hostname: "k8s-worker-3"            
+    podOptions:
+        nodeSelector:
+            kubernetes.io/hostname: "k8s-worker-3"            
     # workload:
     #   main:
     #     type: Deployment
