@@ -44,7 +44,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: cloud1.${DOMAIN_1}
+          - host: cloud3.${DOMAIN_1}
             paths:
             - path: /
               pathType: Prefix
@@ -65,9 +65,9 @@ spec:
         default_phone_region: US
     persistence:
       config:
-        readOnly: false
-        accessModes:
-          - ReadWriteMany
+        # readOnly: false
+        # accessModes:
+        #   - ReadWriteMany
         volsync:
           - name: config
             type: restic
@@ -81,9 +81,9 @@ spec:
               trigger:
                 schedule: 30 22 * * *
       html:
-        readOnly: false
-        accessModes:
-          - ReadWriteMany
+        # readOnly: false
+        # accessModes:
+        #   - ReadWriteMany
         volsync:
           - name: html
             type: restic
@@ -98,6 +98,7 @@ spec:
                 schedule: 30 22 * * *
       data:
         type: nfs
+        readOnly: false
         server: ${TRUENAS_IP}
         path: /mnt/data1/nc_userdata
     cnpg:
