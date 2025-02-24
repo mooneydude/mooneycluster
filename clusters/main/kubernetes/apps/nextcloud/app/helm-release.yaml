@@ -79,7 +79,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 30 22 * * *
+                schedule: 0 16 * * *
       html:
         # readOnly: false
         # accessModes:
@@ -95,7 +95,7 @@ spec:
             src:
               enabled: true
               trigger:
-                schedule: 30 22 * * *
+                schedule: 0 16 * * *
       data:
         type: nfs
         readOnly: false
@@ -105,12 +105,12 @@ spec:
       main:
         # mode: recovery
         backups:
-          enabled: true
+          enabled: false
           credentials: s3
           revision: "1"
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 30 22 * * *"
+              schedule: "0 0 16 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false          
