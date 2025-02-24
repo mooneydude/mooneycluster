@@ -66,34 +66,40 @@ spec:
           token: ${VW_TOKEN}
     persistence:
       data:
-        enabled: true
-        storageClass: ceph-nvme
-        size: 10Gi
+        readOnly: false
         accessModes:
           - ReadWriteMany
-    # cnpg:
-    #   main:
-    #     mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
-    #     backups:
-    #       enabled: true  # Set to 'false' when performing new install (recovery)
-    #       credentials: s3
-    #       scheduledBackups:
-    #         - name: daily-backup
-    #           schedule: "0 15 2 * * *"
-    #           backupOwnerReference: self
-    #           immediate: true
-    #           suspend: false           
-    #       retentionPolicy: "7d"
-    #       revision: "5"
-    #     recovery:
-    #       method: object_store
-    #       credentials: s3
-    #       revision: "4"
+        volsync:
+          - name: b2
+            type: restic
+            credentials: s3
+            dest:
+              enabled: false
+            src:
+              enabled: true  
+    cnpg:
+      main:
+        mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
+        backups:
+          enabled: false  # Set to 'false' when performing new install (recovery)
+          credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 15 2 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false           
+          retentionPolicy: "7d"
+          revision: "5"
+        recovery:
+          method: object_store
+          credentials: s3
+          revision: "4"
     workload:
       main:
-        type: Deployment
-        strategy: RollingUpdate
-        replicas: 2      
+        # type: Deployment
+        # strategy: RollingUpdate
+        # replicas: 2      
         podSpec:
           containers:
             main:
