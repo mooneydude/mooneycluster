@@ -15,7 +15,7 @@ resources:
   - kubernetes-sigs-metrics-server.yaml
   - kustomization.yaml
   - kyverno.yaml
-  # - longhorn.yaml
+  - longhorn.yaml
   - metallb.yaml
   - metrics-server.yaml
   - node-feature-discovery.yaml
@@ -24,7 +24,6 @@ resources:
   - piraeus.yaml
   - postfinance.yaml
   - prometheus-community.yaml
-  - rook-ceph.yaml
   - spegel.yaml
   - stakater.yaml
   - topolvm.yaml
