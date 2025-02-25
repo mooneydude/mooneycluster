@@ -65,37 +65,43 @@ spec:
         default_phone_region: US
     persistence:
       config:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
-        volsync:
-          - name: config
-            type: restic
-            cleanupTempPVC: true
-            cleanupCachePVC: true
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true
-              trigger:
-                schedule: 0 16 * * *
+        storageClass: openebs-hostpath
+        enabled: true
+        size: 1Gi
+        readOnly: false
+        accessModes:
+          - ReadWriteMany
+        # volsync:
+        #   - name: config
+        #     type: restic
+        #     cleanupTempPVC: true
+        #     cleanupCachePVC: true
+        #     credentials: s3
+        #     dest:
+        #       enabled: true
+        #     src:
+        #       enabled: true
+        #       trigger:
+        #         schedule: 0 16 * * *
       html:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
-        volsync:
-          - name: html
-            type: restic
-            cleanupTempPVC: true
-            cleanupCachePVC: true
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true
-              trigger:
-                schedule: 0 16 * * *
+        storageClass: openebs-hostpath
+        enabled: true
+        size: 10Gi
+        readOnly: false
+        accessModes:
+          - ReadWriteMany
+        # volsync:
+        #   - name: html
+        #     type: restic
+        #     cleanupTempPVC: true
+        #     cleanupCachePVC: true
+        #     credentials: s3
+        #     dest:
+        #       enabled: true
+        #     src:
+        #       enabled: true
+        #       trigger:
+        #         schedule: 0 16 * * *
       data:
         type: nfs
         server: ${TRUENAS_IP}
