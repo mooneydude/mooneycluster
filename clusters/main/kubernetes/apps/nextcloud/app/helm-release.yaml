@@ -44,7 +44,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: cloud3.${DOMAIN_1}
+          - host: cloud.${DOMAIN_1}
             paths:
             - path: /
               pathType: Prefix
@@ -98,14 +98,13 @@ spec:
                 schedule: 0 16 * * *
       data:
         type: nfs
-        readOnly: false
         server: ${TRUENAS_IP}
         path: /mnt/data1/nc_userdata
     cnpg:
       main:
         # mode: recovery
         backups:
-          enabled: false
+          enabled: true
           credentials: s3
           revision: "1"
           scheduledBackups:
