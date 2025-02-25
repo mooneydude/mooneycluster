@@ -67,10 +67,6 @@ spec:
       config:
         storageClass: openebs-hostpath
         enabled: true
-        size: 1Gi
-        readOnly: false
-        accessModes:
-          - ReadWriteMany
         # volsync:
         #   - name: config
         #     type: restic
@@ -86,10 +82,6 @@ spec:
       html:
         storageClass: openebs-hostpath
         enabled: true
-        size: 10Gi
-        readOnly: false
-        accessModes:
-          - ReadWriteMany
         # volsync:
         #   - name: html
         #     type: restic
@@ -110,7 +102,7 @@ spec:
       main:
         # mode: recovery
         backups:
-          enabled: true
+          enabled: false
           credentials: s3
           revision: "1"
           scheduledBackups:
