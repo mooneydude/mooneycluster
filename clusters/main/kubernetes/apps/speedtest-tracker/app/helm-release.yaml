@@ -47,7 +47,7 @@ spec:
                 DATETIME_FORMAT: "d.m.Y H:i"
                 SPEEDTEST_SCHEDULE: "0 * * * *"
                 PRUNE_RESULTS_OLDER_THAN: 90
-                DISPLAY_TIMEZONE: "Europe/Amsterdam"
+                DISPLAY_TIMEZONE: "America/Chicago"
                 SPEEDTEST_SERVERS: "32582"
 
     credentials:

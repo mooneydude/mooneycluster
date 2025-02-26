@@ -7,11 +7,11 @@ resources:
   - hass/ks.yaml
   - nextcloud/ks.yaml
   # - nc-talk/ks.yaml
-  - docuseal/ks.yaml
+  # - docuseal/ks.yaml
   - jellyfin/ks.yaml
   - vaultwarden/ks.yaml
   - xepg/ks.yaml
   - xteve/ks.yaml
   # - esphome/ks.yaml
   # - openwakeword/ks.yaml
-  - speedtest-tracker/ks.yaml
+  # - speedtest-tracker/ks.yaml
