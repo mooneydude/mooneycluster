@@ -14,4 +14,4 @@ resources:
   - xteve/ks.yaml
   # - esphome/ks.yaml
   # - openwakeword/ks.yaml
-  # - speedtest-tracker/ks.yaml
+  - speedtest-tracker/ks.yaml

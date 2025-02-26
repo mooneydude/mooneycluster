@@ -76,8 +76,6 @@ spec:
         volsync:
           - name: config
             type: restic
-            cleanupTempPVC: true
-            cleanupCachePVC: true
             credentials: s3
             dest:               #VolSync Destination (Restore)
               enabled: true
@@ -88,7 +86,7 @@ spec:
       main:
         # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: true
+          enabled: false
           credentials: s3
           retentionPolicy: "14d"
           revision: "1"
