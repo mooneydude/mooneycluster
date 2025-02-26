@@ -54,6 +54,7 @@ spec:
             certificateIssuer: cloudflare         
     persistence:
       data:
+        storageClass: ceph-nvme
         readOnly: false
         accessModes:
           - ReadWriteMany
@@ -70,9 +71,10 @@ spec:
               schedule: "15 15 * * *"        
     cnpg:
       main:
+        storageClass: ceph-nvme        
         mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: true  # Set to 'false' when performing new install (recovery)
+          enabled: false  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
