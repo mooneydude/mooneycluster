@@ -55,9 +55,6 @@ spec:
     persistence:
       data:
         storageClass: ceph-nvme
-        readOnly: false
-        accessModes:
-          - ReadWriteMany
         # mountPath: /data
         volsync:
         - name: data
@@ -71,8 +68,7 @@ spec:
               schedule: "15 15 * * *"        
     cnpg:
       main:
-        storageClass: ceph-nvme        
-        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
           enabled: false  # Set to 'false' when performing new install (recovery)
           credentials: s3
