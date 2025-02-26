@@ -94,4 +94,3 @@ spec:
         recovery:
           credentials: s3
           # revision: "1"
-        storageClass: ceph-filesystem # Add this line
