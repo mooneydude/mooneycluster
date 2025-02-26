@@ -86,7 +86,6 @@ spec:
     cnpg:
       main:
         # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
-        storageClass: ceph-filesystem
         backups:
           enabled: false
           credentials: s3
@@ -95,3 +94,4 @@ spec:
         recovery:
           credentials: s3
           # revision: "1"
+        storageClass: ceph-filesystem # Add this line
