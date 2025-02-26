@@ -73,6 +73,7 @@ spec:
 
     persistence:
       config:
+        storageClass: ceph-filesystem
         volsync:
           - name: config
             type: restic
@@ -85,6 +86,7 @@ spec:
     cnpg:
       main:
         # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        storageClass: ceph-filesystem
         backups:
           enabled: false
           credentials: s3
