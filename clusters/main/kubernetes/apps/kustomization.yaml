@@ -11,7 +11,7 @@ resources:
   # - jellyfin/ks.yaml
   # - vaultwarden/ks.yaml
   # - xepg/ks.yaml
-  - xteve/ks.yaml
+  # - xteve/ks.yaml
   # - esphome/ks.yaml
   # - openwakeword/ks.yaml
   # - speedtest-tracker/ks.yaml
