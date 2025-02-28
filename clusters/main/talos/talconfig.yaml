@@ -124,15 +124,15 @@ controlPlane:
      - name: nvme_tcp
      - name: vfio_pci
      - name: uio_pci_generic
-    # schematic:
-    #     customization:
-    #         extraKernelArgs:
-    #             - net.ifnames=0
-    #         systemExtensions:
-    #             officialExtensions:
-    #                 - siderolabs/util-linux-tools
-    #                 - siderolabs/iscsi-tools
-    #                 # - siderolabs/qemu-guest-agent
+    schematic:
+        customization:
+            extraKernelArgs:
+                - net.ifnames=0
+            systemExtensions:
+                officialExtensions:
+                    - siderolabs/util-linux-tools
+                    - siderolabs/iscsi-tools
+                    # - siderolabs/qemu-guest-agent
     machineFiles:
     - content: |
         [plugins."io.containerd.grpc.v1.cri"]
