@@ -11,7 +11,7 @@ metadata:
       traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-  - host: fluxwebhook.${DOMAIN_2}
+  - host: fluxwebhook.${DOMAIN_2} #change back
     http:
       paths:
       - pathType: Prefix
