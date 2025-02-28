@@ -11,7 +11,7 @@ metadata:
       traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-  - host: fluxwebhook.${DOMAIN_2}
+  - host: webhook-flux.${DOMAIN_2}
     http:
       paths:
       - pathType: Prefix
@@ -23,5 +23,5 @@ spec:
               number: 80
   tls:
     - hosts:
-      - fluxwebhook.${DOMAIN_2}
+      - webhook-flux.${DOMAIN_2}
       secretName: cloudflare
