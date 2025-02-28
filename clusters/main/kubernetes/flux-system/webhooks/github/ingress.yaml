@@ -23,5 +23,5 @@ spec:
               number: 80
   tls:
     - hosts:
-      - flux-webhook.${DOMAIN_2}
+      - fluxwebhook.${DOMAIN_2}
       secretName: cloudflare
