@@ -49,15 +49,15 @@ spec:
           main:
             port: 34400
             targetPort: 34400
-    persistence:
-      config:
-        volsync:
-        - name: config
-          type: restic
-          credentials: s3
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            # trigger:
-            #   schedule: 30 1 * * *            
+    # persistence:
+    #   config:
+    #     volsync:
+    #     - name: config
+    #       type: restic
+    #       credentials: s3
+    #       dest:
+    #         enabled: true
+    #       src:
+    #         enabled: true
+    #         # trigger:
+    #         #   schedule: 30 1 * * *            
