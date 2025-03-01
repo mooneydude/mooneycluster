@@ -35,7 +35,7 @@ spec:
       s3:
         type: s3
         url: "${S3URL}"
-        bucket: "${S3PREFIX}-wire1"
+        bucket: "${S3PREFIX}-wg-easy"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
@@ -58,21 +58,21 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: cloudflare
-    # persistence:
-      # config:
-      #   # readOnly: false
-      #   # accessModes:
-      #   #   - ReadWriteMany
-      #   volsync:
-      #     - name: config
-      #       type: restic
-      #       credentials: s3
-      #       dest:
-      #         enabled: true
-      #       src:
-      #         enabled: true
-      #         trigger:
-      #           schedule: 30 4 * * *
+    persistence:
+      config:
+        # readOnly: false
+        # accessModes:
+        #   - ReadWriteMany
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 30 4 * * *
     workload:
       main:
         # type: Deployment
