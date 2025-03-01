@@ -58,7 +58,7 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: cloudflare
-    persistence:
+    # persistence:
       # config:
       #   # readOnly: false
       #   # accessModes:
