@@ -38,7 +38,7 @@ spec:
       s3:
         type: s3
         url: "${S3URL}"
-        bucket: "${S3PREFIX}-hass"
+        bucket: "${S3PREFIX}-ha"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
@@ -93,9 +93,9 @@ spec:
         hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_0001-if00-port0              
     cnpg:
       main:
-        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: false  # Set to 'false' when performing new install (recovery)
+          enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
@@ -104,9 +104,9 @@ spec:
               immediate: true
               suspend: false          
           retentionPolicy: "14d"
-          revision: "2"
-        recovery:
           revision: "1"
+        recovery:
+          # revision: "1"
           credentials: s3
           method: object_store
     workload:
