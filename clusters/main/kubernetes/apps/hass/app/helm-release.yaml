@@ -104,9 +104,9 @@ spec:
               immediate: true
               suspend: false          
           retentionPolicy: "14d"
-          revision: "3"
-        recovery:
           revision: "2"
+        recovery:
+          revision: "1"
           credentials: s3
           method: object_store
     workload:
