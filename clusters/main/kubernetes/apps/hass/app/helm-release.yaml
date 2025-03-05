@@ -38,7 +38,7 @@ spec:
       s3:
         type: s3
         url: "${S3URL}"
-        bucket: "${S3PREFIX}-ha"
+        bucket: "${S3PREFIX}-hass"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
@@ -109,13 +109,13 @@ spec:
           # revision: "1"
           credentials: s3
           method: object_store
-    workload:
-      main:
-        # type: Deployment
-        # strategy: RollingUpdate #Need to install a second zigbee dongle 
-        # replicas: 2      
-        podSpec:
-          nodeSelector:
-            feature.node.kubernetes.io/usb-ff_10c4_ea60.present: "true"
+    # workload:
+    #   main:
+    #     # type: Deployment
+    #     # strategy: RollingUpdate #Need to install a second zigbee dongle 
+    #     # replicas: 2      
+    #     podSpec:
+    #       nodeSelector:
+    #         feature.node.kubernetes.io/usb-ff_10c4_ea60.present: "true"
             
          
