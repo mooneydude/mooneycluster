@@ -57,7 +57,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: ha.${DOMAIN_1}
+          - host: ha1.${DOMAIN_1}
         integrations:
           traefik:
             enabled: true
@@ -95,7 +95,7 @@ spec:
       main:
         mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: false  # Set to 'false' when performing new install (recovery)
+          enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
