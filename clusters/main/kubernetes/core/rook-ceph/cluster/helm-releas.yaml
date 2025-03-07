@@ -24,7 +24,7 @@ spec:
             retries: 3
     values:
       toolbox:
-        enabled: true
+        enabled: false
       removeOSDsIfOutAndSafeToRemove: true
       monitoring:
         enabled: true
