@@ -60,9 +60,10 @@ spec:
             certificateIssuer: cloudflare
     persistence:
       config:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
+        storageClass: ceph-filesystem
+        readOnly: false
+        accessModes:
+          - ReadWriteMany
         volsync:
           - name: config
             type: restic
