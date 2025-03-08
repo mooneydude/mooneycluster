@@ -4,7 +4,7 @@ talosVersion: v1.9.3
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.32.1
 endpoint: https://${VIP}:6443
-allowSchedulingOnControlPlanes: false
+allowSchedulingOnControlPlanes: true
 additionalMachineCertSans:
     - 127.0.0.1
     - ${VIP}
@@ -81,39 +81,39 @@ nodes:
               gateway: ${GATEWAY}
           vip:
             ip: ${VIP}
-    - hostname: k8s-worker-1
-      ipAddress: 192.168.68.114
-      nameservers:
-        - 1.1.1.1
-        - 8.8.8.8
-      installDiskSelector:
-        size: <= 250GB
-    - hostname: k8s-worker-2
-      ipAddress: 192.168.68.128
-      nameservers:
-        - 1.1.1.1
-        - 8.8.8.8
-      installDiskSelector:
-        size: <= 600GB
-    - hostname: k8s-worker-3
-      ipAddress: 192.168.68.130
-      nameservers:
-        - 1.1.1.1
-        - 8.8.8.8
-      installDiskSelector:
-        size: <= 600GB
-    - hostname: k8s-worker-4
-      ipAddress: 192.168.68.131
-      nameservers:
-        - 1.1.1.1
-        - 8.8.8.8
-      installDiskSelector:
-        size: <= 600GB
-      schematic:
-          customization:
-              systemExtensions:
-                  officialExtensions:
-                      - siderolabs/qemu-guest-agent
+    # - hostname: k8s-worker-1
+    #   ipAddress: 192.168.68.114
+    #   nameservers:
+    #     - 1.1.1.1
+    #     - 8.8.8.8
+    #   installDiskSelector:
+    #     size: <= 250GB
+    # - hostname: k8s-worker-2
+    #   ipAddress: 192.168.68.128
+    #   nameservers:
+    #     - 1.1.1.1
+    #     - 8.8.8.8
+    #   installDiskSelector:
+    #     size: <= 600GB
+    # - hostname: k8s-worker-3
+    #   ipAddress: 192.168.68.130
+    #   nameservers:
+    #     - 1.1.1.1
+    #     - 8.8.8.8
+    #   installDiskSelector:
+    #     size: <= 600GB
+    # - hostname: k8s-worker-4
+    #   ipAddress: 192.168.68.131
+    #   nameservers:
+    #     - 1.1.1.1
+    #     - 8.8.8.8
+    #   installDiskSelector:
+    #     size: <= 600GB
+    #   schematic:
+    #       customization:
+    #           systemExtensions:
+    #               officialExtensions:
+    #                   - siderolabs/qemu-guest-agent
 controlPlane:
     patches:
         - '@./patches/controlplane.yaml'
