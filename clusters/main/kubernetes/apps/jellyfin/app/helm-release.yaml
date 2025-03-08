@@ -67,7 +67,7 @@ spec:
       persistence:
         config:
           enabled: true
-          storageClass: ceph-nvme
+          storageClass: ceph-filesystem
           size: 1Gi
           accessModes:
             - ReadWriteMany
