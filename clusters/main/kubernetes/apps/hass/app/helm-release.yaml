@@ -131,6 +131,10 @@ spec:
         #     src:
         #       enabled: true
         mountPath: /config/backups
+      zigbeedongle:
+        enabled: true
+        type: device
+        hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_0001-if00-port0              
 
     cnpg:
       main:
@@ -141,13 +145,13 @@ spec:
           method: object_store
           credentials: s3
 
-    # workload:
-    #   main:
-    #     # type: Deployment
-    #     # strategy: RollingUpdate #Need to install a second zigbee dongle 
-    #     # replicas: 2      
-    #     podSpec:
-    #       nodeSelector:
-    #         feature.node.kubernetes.io/usb-ff_10c4_ea60.present: "true"
+    workload:
+      main:
+        # type: Deployment
+        # strategy: RollingUpdate #ToDo install a second zigbee dongle 
+        # replicas: 2      
+        podSpec:
+          nodeSelector:
+            feature.node.kubernetes.io/usb-ff_10c4_ea60.present: "true"
             
          
