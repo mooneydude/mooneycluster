@@ -112,24 +112,24 @@ spec:
 
     persistence:
       config:
-        # volsync:
-        #   - name: b2
-        #     type: restic
-        #     credentials: s3
-        #     dest:
-        #       enabled: true
-        #     src:
-        #       enabled: true
+        volsync:
+          - name: b2
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
       backup:
         enabled: true
-        # volsync:
-        #   - name: b2
-        #     type: restic
-        #     credentials: s3
-        #     dest:
-        #       enabled: true
-        #     src:
-        #       enabled: true
+        volsync:
+          - name: b2
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
         mountPath: /config/backups
       zigbeedongle:
         enabled: true
