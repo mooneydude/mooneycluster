@@ -72,43 +72,75 @@ spec:
       trusted_proxies:
       - 172.16.0.0/16
       - 172.17.0.0/16
+    # persistence:
+    #   config:
+    #     # readOnly: false
+    #     # accessModes:
+    #     #   - ReadWriteMany        
+    #     volsync:
+    #       - name: b2
+    #         type: restic
+    #         credentials: s3
+    #         dest:
+    #           enabled: true
+    #         src:
+    #           enabled: true
+    #           trigger:
+    #             schedule: "0 16 * * *"      
+    #   zigbeedongle:
+    #     enabled: true
+    #     type: device
+    #     hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_0001-if00-port0              
+    # cnpg:
+    #   main:
+    #     mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+    #     backups:
+    #       enabled: false  # Set to 'false' when performing new install (recovery)
+    #       credentials: s3
+    #       scheduledBackups:
+    #         - name: daily-backup
+    #           schedule: "0 15 16 * * *"
+    #           backupOwnerReference: self
+    #           immediate: true
+    #           suspend: false          
+    #       retentionPolicy: "14d"
+    #       revision: "3"
+    #     recovery:
+    #       revision: "2"
+    #       credentials: s3
+    #       method: object_store
+
     persistence:
       config:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany        
-        volsync:
-          - name: b2
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true
-              trigger:
-                schedule: "0 16 * * *"      
-      zigbeedongle:
+        # volsync:
+        #   - name: b2
+        #     type: restic
+        #     credentials: s3
+        #     dest:
+        #       enabled: true
+        #     src:
+        #       enabled: true
+      backup:
         enabled: true
-        type: device
-        hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_0001-if00-port0              
+        # volsync:
+        #   - name: b2
+        #     type: restic
+        #     credentials: s3
+        #     dest:
+        #       enabled: true
+        #     src:
+        #       enabled: true
+        mountPath: /config/backups
+
     cnpg:
       main:
-        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: true  # Set to 'false' when performing new install (recovery)
+          enabled: true
           credentials: s3
-          scheduledBackups:
-            - name: daily-backup
-              schedule: "0 15 16 * * *"
-              backupOwnerReference: self
-              immediate: true
-              suspend: false          
-          retentionPolicy: "14d"
-          revision: "3"
         recovery:
-          revision: "2"
-          credentials: s3
           method: object_store
+          credentials: s3
+
     # workload:
     #   main:
     #     # type: Deployment
