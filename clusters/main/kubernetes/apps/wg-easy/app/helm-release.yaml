@@ -72,14 +72,10 @@ spec:
     #             schedule: 30 4 * * *
     persistence:
       config:
-        volsync:
-          - name: b2
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true    
+        storageClass: ceph-filesystem
+        size: 1Gi
+        accessModes:
+          - ReadWriteMany    
     workload:
       main:
         # type: Deployment
