@@ -60,16 +60,16 @@ spec:
             certificateIssuer: cloudflare
     persistence:
       config:
-        # volsync:
-        #   - name: config
-        #     type: restic
-        #     credentials: s3
-        #     dest:
-        #       enabled: true
-        #     src:
-        #       enabled: true
-        #       trigger:
-        #         schedule: 30 4 * * *
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              # trigger:
+              #   schedule: 30 4 * * *
     # persistence:
     #   config:
     #     storageClass: ceph-filesystem
