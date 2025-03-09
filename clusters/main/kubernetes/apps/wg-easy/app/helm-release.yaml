@@ -58,24 +58,24 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: cloudflare
-    # persistence:
-    #   config:
-    #     volsync:
-    #       - name: config
-    #         type: restic
-    #         credentials: s3
-    #         dest:
-    #           enabled: true
-    #         src:
-    #           enabled: true
-    #           trigger:
-    #             schedule: 30 4 * * *
     persistence:
       config:
-        storageClass: ceph-filesystem
-        size: 1Gi
-        accessModes:
-          - ReadWriteMany    
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 30 4 * * *
+    # persistence:
+    #   config:
+    #     storageClass: ceph-filesystem
+    #     size: 1Gi
+    #     accessModes:
+    #       - ReadWriteMany    
     workload:
       main:
         # type: Deployment
