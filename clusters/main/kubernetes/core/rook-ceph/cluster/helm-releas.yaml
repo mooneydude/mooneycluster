@@ -101,7 +101,7 @@ spec:
           disable: false
 
         dashboard:
-          enabled: false
+          enabled: true
           urlPrefix: /
           ssl: false
 
