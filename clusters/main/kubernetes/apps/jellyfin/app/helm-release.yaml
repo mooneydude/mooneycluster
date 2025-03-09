@@ -54,7 +54,7 @@ spec:
         config:
           size: 1Gi
           volsync:
-          - name: config
+          - name: b2
             type: restic
             # cleanupTempPVC: true
             # cleanupCachePVC: true
@@ -63,8 +63,6 @@ spec:
               enabled: true
             src:
               enabled: true
-              trigger:
-                schedule: 30 0 * * *
       # persistence:
       #   config:
       #     enabled: true
