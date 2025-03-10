@@ -50,14 +50,27 @@ spec:
             port: 34400
             targetPort: 34400
     persistence:
-      config:
+      data:
+        enabled: true
+        size: 10Gi
         volsync:
-        - name: b2
-          type: restic
-          credentials: s3
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            trigger:
-              schedule: 45 16 * * *            
+          - name: tv
+            type: restic
+            credentials: s3
+            src:
+              enabled: true
+              schedule: "0 17 * * *" 
+            dest:
+              enabled: false  # Disable restore for clean install
+      config:
+        enabled: true
+        size: 1Gi
+        volsync:
+          - name: tv-config
+            type: restic
+            credentials: s3
+            src:
+              enabled: true
+              schedule: "0 17 * * *"  
+            dest:
+              enabled: false  # Disable restore for clean install
