@@ -74,27 +74,27 @@ spec:
             credentials: s3
             src:
               enabled: true
-              schedule: "15 14 * * *"  # 10:00 am dst on
+              schedule: "45 14 * * *"  # 9:45 am dst on
             dest:
               enabled: true  # Disable restore for clean install
     cnpg:
       main:
-        # mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
+        mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: true  # Set to 'false' when performing new install (recovery)
+          enabled: false  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 15 14 * * *"
+              schedule: "0 45 14 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false           
           retentionPolicy: "7d"
-          revision: "1"
+          revision: "2"
         recovery:
           method: object_store
           credentials: s3
-          # revision: "1"
+          revision: "1"
     workload:
       main:
         # type: Deployment
