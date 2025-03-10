@@ -67,22 +67,22 @@ spec:
     persistence:
       data:
         enabled: true
-        size: 1Gi
+        size: 10Gi
       # Optional: Uncomment and configure if you want VolSync backups later
-      # volsync:
-      #   - name: data
-      #     type: restic
-      #     credentials: s3
-      #     src:
-      #       enabled: true
-      #       schedule: "0 0 * * *"  # Daily at midnight
-      #     dest:
-      #       enabled: false  # Disable restore for clean install
+      volsync:
+        - name: data
+          type: restic
+          credentials: s3
+          src:
+            enabled: true
+            schedule: "15 4 * * *"  # 10:15 pm
+          dest:
+            enabled: false  # Disable restore for clean install
     cnpg:
       main:
         # mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: false  # Set to 'false' when performing new install (recovery)
+          enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
@@ -91,11 +91,11 @@ spec:
               immediate: true
               suspend: false           
           retentionPolicy: "7d"
-          revision: "5"
+          revision: "1"
         recovery:
           method: object_store
           credentials: s3
-          revision: "4"
+          # revision: "1"
     workload:
       main:
         # type: Deployment
