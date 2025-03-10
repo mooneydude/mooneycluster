@@ -54,7 +54,7 @@ spec:
         config:
           size: 1Gi
           volsync:
-          - name: b2
+          - name: config
             type: restic
             # cleanupTempPVC: true
             # cleanupCachePVC: true
