@@ -70,7 +70,7 @@ spec:
               enabled: true
               schedule: "0 14 * * *"  # 10:00 am dst on
             dest:
-              enabled: false  # Disable restore for clean install
+              enabled: true  # Disable restore for clean install
     workload:
       main:
         # type: Deployment
