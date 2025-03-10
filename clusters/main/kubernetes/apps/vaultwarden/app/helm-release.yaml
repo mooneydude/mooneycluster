@@ -69,32 +69,32 @@ spec:
         size: 10Gi
         # Optional: Uncomment and configure if you want VolSync backups later
         volsync:
-          - name: data
+          - name: b2
             type: restic
             credentials: s3
             src:
               enabled: true
-              schedule: "45 14 * * *"  # 9:45 am dst on
+              schedule: "45 15 * * *"  # 10:45 am dst on
             dest:
-              enabled: true  # Disable restore for clean install
+              enabled: false  # Disable restore for clean install
     cnpg:
       main:
-        mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
+        # mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: false  # Set to 'false' when performing new install (recovery)
+          enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 45 14 * * *"
+              schedule: "0 45 15 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false           
           retentionPolicy: "7d"
-          revision: "2"
+          revision: "1"
         recovery:
           method: object_store
           credentials: s3
-          revision: "1"
+          # revision: "1"
     workload:
       main:
         # type: Deployment
