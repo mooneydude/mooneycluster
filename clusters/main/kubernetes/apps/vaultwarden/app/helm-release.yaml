@@ -38,7 +38,7 @@ spec:
       s3:
         type: s3
         url: "${S3URL}"
-        bucket: "${S3PREFIX}-vault"
+        bucket: "${S3PREFIX}-vaultwarden"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"       
@@ -65,27 +65,28 @@ spec:
           disableAdminToken: false
           token: ${VW_TOKEN}
     persistence:
-      data:
-        # readOnly: false
-        # accessModes:
-        #   - ReadWriteMany
-        volsync:
-          - name: b2
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true  
+      config:
+        enabled: true
+        size: 1Gi
+      # Optional: Uncomment and configure if you want VolSync backups later
+      # volsync:
+      #   - name: config
+      #     type: restic
+      #     credentials: s3
+      #     src:
+      #       enabled: true
+      #       schedule: "0 0 * * *"  # Daily at midnight
+      #     dest:
+      #       enabled: false  # Disable restore for clean install
     cnpg:
       main:
-        mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
+        # mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
           enabled: false  # Set to 'false' when performing new install (recovery)
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 15 2 * * *"
+              schedule: "0 15 4 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false           
