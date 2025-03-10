@@ -76,7 +76,7 @@ spec:
               enabled: true
               schedule: "25 4 * * *"  # 10:25 pm
             dest:
-              enabled: true  # Disable restore for clean install
+              enabled: false  # Disable restore for clean install
     cnpg:
       main:
         # mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
