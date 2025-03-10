@@ -74,7 +74,7 @@ spec:
             credentials: s3
             src:
               enabled: true
-              schedule: "25 4 * * *"  # 10:25 pm
+              schedule: "0 14 * * *"  # 10:00 am dst on
             dest:
               enabled: false  # Disable restore for clean install
     cnpg:
@@ -85,7 +85,7 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 25 4 * * *"
+              schedule: "0 0 14 * * *"
               backupOwnerReference: self
               immediate: true
               suspend: false           

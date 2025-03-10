@@ -35,7 +35,7 @@ spec:
       s3:
         type: s3
         url: "${S3URL}"
-        bucket: "${S3PREFIX}-wg-easy"
+        bucket: "${S3PREFIX}-wireguard"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
@@ -60,22 +60,17 @@ spec:
             certificateIssuer: cloudflare
     persistence:
       config:
+        size: 10Gi
+        # Optional: Uncomment and configure if you want VolSync backups later
         volsync:
           - name: config
             type: restic
             credentials: s3
-            dest:
-              enabled: true
             src:
               enabled: true
-              # trigger:
-              #   schedule: 30 4 * * *
-    # persistence:
-    #   config:
-    #     storageClass: ceph-filesystem
-    #     size: 1Gi
-    #     accessModes:
-    #       - ReadWriteMany    
+              schedule: "0 14 * * *"  # 10:00 am dst on
+            dest:
+              enabled: false  # Disable restore for clean install
     workload:
       main:
         # type: Deployment
