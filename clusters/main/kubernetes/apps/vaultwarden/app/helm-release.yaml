@@ -65,12 +65,12 @@ spec:
           disableAdminToken: false
           token: ${VW_TOKEN}
     persistence:
-      config:
+      data:
         enabled: true
         size: 1Gi
       # Optional: Uncomment and configure if you want VolSync backups later
       # volsync:
-      #   - name: config
+      #   - name: data
       #     type: restic
       #     credentials: s3
       #     src:
