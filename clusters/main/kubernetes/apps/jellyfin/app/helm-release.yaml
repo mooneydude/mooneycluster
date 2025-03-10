@@ -53,16 +53,16 @@ spec:
       persistence:
         config:
           size: 1Gi
-          # volsync:
-          # - name: b2
-          #   type: restic
-          #   # cleanupTempPVC: true
-          #   # cleanupCachePVC: true
-          #   credentials: s3
-          #   dest:
-          #     enabled: true
-          #   src:
-          #     enabled: true
+          volsync:
+          - name: b2
+            type: restic
+            # cleanupTempPVC: true
+            # cleanupCachePVC: true
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
 
 
       # persistence:
